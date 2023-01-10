@@ -76,7 +76,6 @@ export const useUserStore = defineStore({
 
     // 获取用户信息
     GetInfo() {
-      //
       const that = this;
       return new Promise((resolve, reject) => {
         getUserInfo()
