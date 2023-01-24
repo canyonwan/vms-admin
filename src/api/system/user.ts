@@ -17,7 +17,7 @@ export interface BasicPageParams {
  */
 export function getUserInfo() {
   return http.request({
-    url: 'account/info/{id}',
+    url: 'user/info',
     method: 'get',
   });
 }
