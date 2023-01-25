@@ -98,7 +98,7 @@ const transform: AxiosTransform = {
         $message.error(errorMsg);
         break;
       // 登录超时
-      case ResultEnum.TIMEOUT:
+      case ResultEnum.TIMEOUT && ResultEnum.AuthFail:
         const LoginName = PageEnum.BASE_LOGIN_NAME;
         const LoginPath = PageEnum.BASE_LOGIN;
         if (router.currentRoute.value?.name === LoginName) return;
@@ -182,7 +182,7 @@ const transform: AxiosTransform = {
       // jwt token
       (config as Recordable).headers.Authorization = options.authenticationScheme
         ? `${options.authenticationScheme} ${token}`
-        : token;
+        : `Bearer ${token}`;
     }
     return config;
   },

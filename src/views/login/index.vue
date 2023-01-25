@@ -1,14 +1,14 @@
 <template>
-  <div class="view-account">
-    <div class="view-account-header"></div>
-    <div class="view-account-container">
-      <div class="view-account-top">
-        <div class="view-account-top-logo">
+  <div class="view-phone">
+    <div class="view-phone-header"></div>
+    <div class="view-phone-container">
+      <div class="view-phone-top">
+        <div class="view-phone-top-logo">
           <img :src="websiteConfig.loginImage" alt="" />
         </div>
-        <div class="view-account-top-desc">{{ websiteConfig.loginDesc }}</div>
+        <div class="view-phone-top-desc">{{ websiteConfig.loginDesc }}</div>
       </div>
-      <div class="view-account-form">
+      <div class="view-phone-form">
         <n-form
           ref="formRef"
           label-placement="left"
@@ -16,8 +16,8 @@
           :model="formInline"
           :rules="rules"
         >
-          <n-form-item path="account">
-            <n-input v-model:value="formInline.account" placeholder="请输入用户名">
+          <n-form-item path="phone">
+            <n-input v-model:value="formInline.phone" placeholder="请输入用户名">
               <template #prefix>
                 <n-icon size="18" color="#808695">
                   <PersonOutline />
@@ -55,7 +55,7 @@
             </n-button>
           </n-form-item>
           <n-form-item class="default-color">
-            <div class="flex view-account-other">
+            <div class="flex view-phone-other">
               <div class="flex-initial">
                 <span>其它登录方式</span>
               </div>
@@ -94,8 +94,9 @@
   import { PageEnum } from '@/enums/pageEnum';
   import { websiteConfig } from '@/config/website.config';
   interface FormState {
-    account: string;
+    phone: string;
     password: string;
+    platform: number;
   }
 
   const formRef = ref();
@@ -105,13 +106,14 @@
   const LOGIN_NAME = PageEnum.BASE_LOGIN_NAME;
 
   const formInline = reactive({
-    account: '',
+    phone: '',
     password: '',
+    platform: 1,
     isCaptcha: true,
   });
 
   const rules = {
-    account: { required: true, message: '请输入用户名', trigger: 'blur' },
+    phone: { required: true, message: '请输入用户名', trigger: 'blur' },
     password: { required: true, message: '请输入密码', trigger: 'blur' },
   };
 
@@ -124,13 +126,14 @@
     e.preventDefault();
     formRef.value.validate(async (errors) => {
       if (!errors) {
-        const { account, password } = formInline;
+        const { phone, password, platform } = formInline;
         message.loading('登录中...');
         loading.value = true;
 
         const params: FormState = {
-          account,
+          phone,
           password,
+          platform,
         };
 
         try {
@@ -139,6 +142,7 @@
           if (code == ResultEnum.SUCCESS) {
             const toPath = decodeURIComponent((route.query?.redirect || '/') as string);
             message.success('登录成功，即将进入系统');
+            debugger;
             if (route.name === LOGIN_NAME) {
               router.replace('/');
             } else router.replace(toPath);
@@ -156,7 +160,7 @@
 </script>
 
 <style lang="less" scoped>
-  .view-account {
+  .view-phone {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -194,14 +198,14 @@
   }
 
   @media (min-width: 768px) {
-    .view-account {
+    .view-phone {
       background-image: url('../../assets/images/login.svg');
       background-repeat: no-repeat;
       background-position: 50%;
       background-size: 100%;
     }
 
-    .page-account-container {
+    .page-phone-container {
       padding: 32px 0 24px 0;
     }
   }

@@ -110,6 +110,7 @@
       }
 
       function updateMenu() {
+        debugger;
         if (!settingStore.menuSetting.mixMenu) {
           menus.value = generatorMenu(asyncRouteStore.getMenus);
         } else {
