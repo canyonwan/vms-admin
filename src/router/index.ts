@@ -4,12 +4,12 @@ import { RedirectRoute } from '@/router/base';
 import { PageEnum } from '@/enums/pageEnum';
 import { createRouterGuards } from './router-guards';
 
-const modules = import.meta.globEager('./modules/**/*.ts');
+const modules = import.meta.glob('./modules/**/*.ts');
 
 const routeModuleList: RouteRecordRaw[] = [];
 
 Object.keys(modules).forEach((key) => {
-  const mod = modules[key].default || {};
+  const mod = modules[key].name || {};
   const modList = Array.isArray(mod) ? [...mod] : [mod];
   routeModuleList.push(...modList);
 });

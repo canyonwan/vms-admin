@@ -1,4 +1,3 @@
-import { adminMenus } from '@/api/system/menu';
 import { constantRouterIcon } from './router-icons';
 import { RouteRecordRaw } from 'vue-router';
 import { Layout, ParentLayout } from '@/router/constant';
@@ -54,18 +53,7 @@ export const routerGenerator = (routerMap, parent?): any[] => {
  * @returns {Promise<Router>}
  */
 export const generatorDynamicRouter = (): Promise<RouteRecordRaw[]> => {
-  return new Promise((resolve, reject) => {
-    adminMenus()
-      .then((result) => {
-        const routeList = routerGenerator(result);
-        asyncImportRoute(routeList);
-
-        resolve(routeList);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
+  return new Promise(() => {});
 };
 
 /**

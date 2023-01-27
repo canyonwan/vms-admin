@@ -88,6 +88,7 @@ export const useAsyncRouteStore = defineStore({
     },
     async generateRoutes(data) {
       let accessedRouters;
+      debugger;
       const permissionsList = data.permissions || [];
       const routeFilter = (route) => {
         const { meta } = route;
@@ -115,6 +116,7 @@ export const useAsyncRouteStore = defineStore({
       accessedRouters = accessedRouters.filter(routeFilter);
       this.setRouters(accessedRouters);
       this.setMenus(accessedRouters);
+
       return toRaw(accessedRouters);
     },
   },
