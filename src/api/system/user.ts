@@ -7,8 +7,8 @@ export interface BasicResponseModel<T = any> {
 }
 
 export interface BasicPageParams {
-  pageNumber: number;
-  pageSize: number;
+  page: number;
+  size: number;
   total: number;
 }
 
@@ -19,6 +19,17 @@ export function getUserInfo() {
   return http.request({
     url: 'user/info',
     method: 'get',
+  });
+}
+
+/**
+ * @description: 获取用户列表
+ */
+export function getUserList(params: BasicPageParams) {
+  return http.request({
+    url: 'user/page',
+    method: 'get',
+    params,
   });
 }
 
