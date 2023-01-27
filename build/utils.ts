@@ -22,19 +22,19 @@ export function wrapperEnv(envConf: Recordable): ViteEnv {
   const ret: any = {};
 
   for (const envName of Object.keys(envConf)) {
-    let nickName = envConf[envName].replace(/\\n/g, '\n');
-    nickName = nickName === 'true' ? true : nickName === 'false' ? false : nickName;
+    let realName = envConf[envName].replace(/\\n/g, '\n');
+    realName = realName === 'true' ? true : realName === 'false' ? false : realName;
 
     if (envName === 'VITE_PORT') {
-      nickName = Number(nickName);
+      realName = Number(realName);
     }
     if (envName === 'VITE_PROXY') {
       try {
-        nickName = JSON.parse(nickName);
+        realName = JSON.parse(realName);
       } catch (error) {}
     }
-    ret[envName] = nickName;
-    process.env[envName] = nickName;
+    ret[envName] = realName;
+    process.env[envName] = realName;
   }
   return ret;
 }
