@@ -2,6 +2,7 @@ import { ComponentType } from './index';
 import type { CSSProperties } from 'vue';
 import type { GridProps, GridItemProps } from 'naive-ui/lib/grid';
 import type { ButtonProps } from 'naive-ui/lib/button';
+import { Justify } from 'naive-ui/es/space/src/Space';
 
 export interface FormSchema {
   field: string;
@@ -23,10 +24,17 @@ export interface FormProps {
   labelWidth?: number | string;
   schemas?: FormSchema[];
   inline: boolean;
-  layout?: string;
+  layout?: string; // 按钮的布局
   size: string;
-  labelPlacement: string;
-  isFull: boolean;
+  labelPlacement: string; // 显示的位置'left' | 'top'
+  isFull: boolean; // 填满宽度
+  buttonPosition?: Justify;
+
+  disabled: boolean; // 表单禁用
+  showLabel: boolean; // 是否显示label
+  showRequireMark?: boolean; // 是否显示必填
+  requireMarkPlacement: string; // * 位置 'left' | 'right'
+
   showActionButtonGroup?: boolean;
   showResetButton?: boolean;
   resetButtonOptions?: Partial<ButtonProps>;
@@ -35,17 +43,19 @@ export interface FormProps {
   submitButtonOptions?: Partial<ButtonProps>;
   submitButtonText?: string;
   resetButtonText?: string;
-  gridProps?: GridProps;
+  gridProps: GridProps;
   giProps?: GridItemProps;
   resetFunc?: () => Promise<void>;
   submitFunc?: () => Promise<void>;
   submitOnReset?: boolean;
   baseGridStyle?: CSSProperties;
-  collapsedRows?: number;
+  showCancelButton?: boolean;
+  cancelButtonText?: string;
 }
 
 export interface FormActionType {
   submit: () => Promise<any>;
+  cancel: () => Promise<any>;
   setProps: (formProps: Partial<FormProps>) => Promise<void>;
   setFieldsValue: (values: Recordable) => Promise<void>;
   clearValidate: (name?: string | string[]) => Promise<void>;
