@@ -67,7 +67,7 @@
   import { useMessage } from 'naive-ui';
   import { BasicTable, TableAction } from '@/components/Table';
   import { getRoleList } from '@/api/system/role';
-  import { getMenuList } from '@/api/system/menu';
+  // import { getMenuList } from '@/api/system/menu';
   import { columns } from './columns';
   import { PlusOutlined } from '@vicons/antd';
   import { getTreeAll } from '@/utils';
@@ -209,9 +209,9 @@
   }
 
   onMounted(async () => {
-    const treeMenuList = await getMenuList();
-    expandedKeys.value = treeMenuList.list.map((item) => item.key);
-    treeData.value = treeMenuList.list;
+    // const treeMenuList = await getMenuList();
+    // expandedKeys.value = treeMenuList.list.map((item) => item.key);
+    // treeData.value = treeMenuList.list;
   });
 </script>
 
