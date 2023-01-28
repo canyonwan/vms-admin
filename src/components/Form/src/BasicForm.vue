@@ -82,7 +82,7 @@
       >
         <n-space
           align="center"
-          :justify="isInline ? 'end' : 'start'"
+          :justify="getProps.buttonPosition"
           :style="{ 'margin-left': `${isInline ? 12 : getProps.labelWidth}px` }"
         >
           <n-button
@@ -90,8 +90,16 @@
             v-bind="getSubmitBtnOptions"
             @click="handleSubmit"
             :loading="loadingSub"
-            >{{ getProps.submitButtonText }}</n-button
-          >
+            >{{ getProps.submitButtonText }}
+          </n-button>
+          <n-button
+            ghost
+            v-if="getProps.showCancelButton"
+            v-bind="getSubmitBtnOptions"
+            @click="handleCancel"
+            :loading="loadingSub"
+            >{{ getProps.cancelButtonText }}
+          </n-button>
           <n-button
             v-if="getProps.showResetButton"
             v-bind="getResetBtnOptions"
@@ -235,20 +243,34 @@
         formModel,
       });
 
-      const { handleSubmit, validate, resetFields, getFieldsValue, clearValidate, setFieldsValue } =
-        useFormEvents({
-          emit,
-          getProps,
-          formModel,
-          getSchema,
-          formElRef: formElRef as Ref<FormActionType>,
-          defaultFormModel,
-          loadingSub,
-          handleFormValues,
-        });
+      const {
+        cancelButton,
+        handleSubmit,
+        validate,
+        resetFields,
+        getFieldsValue,
+        clearValidate,
+        setFieldsValue,
+      } = useFormEvents({
+        emit,
+        getProps,
+        formModel,
+        getSchema,
+        formElRef: formElRef as Ref<FormActionType>,
+        defaultFormModel,
+        loadingSub,
+        handleFormValues,
+      });
 
       function unfoldToggle() {
         gridCollapsed.value = !gridCollapsed.value;
+      }
+
+      function handleCancel() {
+        console.log(
+          '%c [ BasicForm cancel ]-271',
+          'font-size:13px; background:pink; color:#bf2c9f;'
+        );
       }
 
       async function setProps(formProps: Partial<FormProps>): Promise<void> {
@@ -263,6 +285,7 @@
         clearValidate,
         setProps,
         submit: handleSubmit,
+        cancel: cancelButton,
       };
 
       watch(
@@ -293,6 +316,7 @@
         getSubmitBtnOptions,
         getResetBtnOptions,
         handleSubmit,
+        handleCancel,
         resetFields,
         loadingSub,
         isInline,
