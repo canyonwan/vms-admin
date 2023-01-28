@@ -129,7 +129,7 @@
   import { ref, unref, reactive, onMounted, computed } from 'vue';
   import { useDialog, useMessage } from 'naive-ui';
   import { DownOutlined, AlignLeftOutlined, SearchOutlined, FormOutlined } from '@vicons/antd';
-  import { getMenuList } from '@/api/system/menu';
+  // import { getMenuList } from '@/api/system/menu';
   import { getTreeItem } from '@/utils';
   import CreateDrawer from './CreateDrawer.vue';
 
@@ -253,11 +253,11 @@
   }
 
   onMounted(async () => {
-    const treeMenuList = await getMenuList();
-    const keys = treeMenuList.list.map((item) => item.key);
-    Object.assign(formParams, keys);
-    treeData.value = treeMenuList.list;
-    loading.value = false;
+    // const treeMenuList = await getMenuList();
+    // const keys = treeMenuList.list.map((item) => item.key);
+    // Object.assign(formParams, keys);
+    // treeData.value = treeMenuList.list;
+    // loading.value = false;
   });
 
   function onExpandedKeys(keys) {

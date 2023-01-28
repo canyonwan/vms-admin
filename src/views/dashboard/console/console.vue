@@ -323,14 +323,14 @@
     },
   ];
 
-  onMounted(async () => {
-    const data = await getConsoleInfo();
-    visits.value = data.visits;
-    saleroom.value = data.saleroom;
-    orderLarge.value = data.orderLarge;
-    volume.value = data.volume;
-    loading.value = false;
-  });
+  // onMounted(async () => {
+  //   const data = await getConsoleInfo();
+  //   visits.value = data.visits;
+  //   saleroom.value = data.saleroom;
+  //   orderLarge.value = data.orderLarge;
+  //   volume.value = data.volume;
+  //   loading.value = false;
+  // });
 </script>
 
 <style lang="less" scoped></style>
