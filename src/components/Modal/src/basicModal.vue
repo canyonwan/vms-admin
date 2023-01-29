@@ -6,7 +6,7 @@
     <template #default>
       <slot name="default"></slot>
     </template>
-    <template #action v-if="!$slots.action">
+    <template #action v-if="getBindValue.showActionButtonGroup && !getBindValue.disabled">
       <n-space>
         <n-button @click="closeModal">取消</n-button>
         <n-button type="primary" :loading="subLoading" @click="handleSubmit">{{
