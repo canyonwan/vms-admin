@@ -34,10 +34,8 @@
 </template>
 
 <script setup lang="ts">
-  import { TableAction, BasicTable } from '@/components/Table';
+  import { TableAction } from '@/components/Table';
   import { PlusOutlined } from '@vicons/antd';
-  import { NCard, NButton, NIcon } from 'naive-ui';
-  import { reactive, h, unref } from 'vue';
   import { columns } from './columns';
   import { getUserList } from '@/api/system/user';
   import { useModal } from '@/components/Modal';
@@ -75,7 +73,7 @@
       });
     },
   });
-  const [modalRegister, { openModal, closeModal, setProps }] = useModal({});
+  const [modalRegister, { openModal, setProps }] = useModal({});
 
   const loadDataTable = async (res: any) => {
     let params = {
