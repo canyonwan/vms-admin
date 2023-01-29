@@ -17,7 +17,7 @@
     "noUnusedParameters": true,
     "experimentalDecorators": true,
     "lib": ["dom", "esnext"],
-    "types": ["vite/client"],
+    "types": ["vite/client", "vitest/globals"],
     "typeRoots": ["./node_modules/@types/", "./types"],
     "noImplicitAny": false,
     "skipLibCheck": true,
@@ -36,8 +36,9 @@
     "build/**/*.ts",
     "build/**/*.d.ts",
     "mock/**/*.ts",
-    "components.d.ts",
-    "vite.config.ts"
+    "vite.config.ts",
+    "auto-imports.d.ts",
+    "components.d.ts"
   ],
   "exclude": ["node_modules", "dist", "**/*.js"]
 }

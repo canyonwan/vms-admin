@@ -2,9 +2,9 @@ module.exports = {
   printWidth: 100,
   tabWidth: 2,
   useTabs: false,
-  semi: true,
+  semi: false, // 未尾逗号
   vueIndentScriptAndStyle: true,
-  singleQuote: true,
+  singleQuote: true, // 字符串是否使用单引号
   quoteProps: 'as-needed',
   bracketSpacing: true,
   trailingComma: 'es5',
