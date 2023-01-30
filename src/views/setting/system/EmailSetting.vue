@@ -37,43 +37,43 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, ref, toRefs } from 'vue';
-  import { useMessage } from 'naive-ui';
+  import { defineComponent, reactive, ref, toRefs } from 'vue'
+  import { useMessage } from 'naive-ui'
 
   const rules = {
     originator: {
       required: true,
       message: '请输入发件人邮箱',
-      trigger: 'blur',
-    },
-  };
+      trigger: 'blur'
+    }
+  }
   export default defineComponent({
     setup() {
-      const formRef: any = ref(null);
-      const message = useMessage();
+      const formRef: any = ref(null)
+      const message = useMessage()
 
       const state = reactive({
         formValue: {
-          originator: '',
-        },
-      });
+          originator: ''
+        }
+      })
 
       function formSubmit() {
         formRef.value.validate((errors) => {
           if (!errors) {
-            message.success('验证成功');
+            message.success('验证成功')
           } else {
-            message.error('验证失败，请填写完整信息');
+            message.error('验证失败，请填写完整信息')
           }
-        });
+        })
       }
 
       return {
         formRef,
         ...toRefs(state),
         rules,
-        formSubmit,
-      };
-    },
-  });
+        formSubmit
+      }
+    }
+  })
 </script>

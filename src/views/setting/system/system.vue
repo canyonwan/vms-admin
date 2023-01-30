@@ -26,48 +26,48 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, reactive, toRefs } from 'vue';
-  import BasicSetting from './BasicSetting.vue';
-  import RevealSetting from './RevealSetting.vue';
-  import EmailSetting from './EmailSetting.vue';
+  import { defineComponent, reactive, toRefs } from 'vue'
+  import BasicSetting from './BasicSetting.vue'
+  import RevealSetting from './RevealSetting.vue'
+  import EmailSetting from './EmailSetting.vue'
 
   const typeTabList = [
     {
       name: '基本设置',
       desc: '系统常规设置',
-      key: 1,
+      key: 1
     },
     {
       name: '显示设置',
       desc: '系统显示设置',
-      key: 2,
+      key: 2
     },
     {
       name: '邮件设置',
       desc: '系统邮件设置',
-      key: 3,
-    },
-  ];
+      key: 3
+    }
+  ]
   export default defineComponent({
     components: { BasicSetting, RevealSetting, EmailSetting },
     setup() {
       const state = reactive({
         type: 1,
-        typeTitle: '基本设置',
-      });
+        typeTitle: '基本设置'
+      })
 
       function switchType(e) {
-        state.type = e.key;
-        state.typeTitle = e.name;
+        state.type = e.key
+        state.typeTitle = e.name
       }
 
       return {
         ...toRefs(state),
         switchType,
-        typeTabList,
-      };
-    },
-  });
+        typeTabList
+      }
+    }
+  })
 </script>
 <style lang="less" scoped>
   .thing-cell {

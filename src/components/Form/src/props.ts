@@ -1,43 +1,43 @@
-import type { CSSProperties, PropType } from 'vue';
-import { FormSchema } from './types/form';
-import type { GridProps, GridItemProps } from 'naive-ui/lib/grid';
-import type { ButtonProps } from 'naive-ui/lib/button';
-import { propTypes } from '@/utils/propTypes';
+import type { CSSProperties, PropType } from 'vue'
+import { FormSchema } from './types/form'
+import type { GridProps, GridItemProps } from 'naive-ui/lib/grid'
+import type { ButtonProps } from 'naive-ui/lib/button'
+import { propTypes } from '@/utils/propTypes'
 export const basicProps = {
   // 标签宽度  固定宽度
   labelWidth: {
     type: [Number, String] as PropType<number | string>,
-    default: 80,
+    default: 80
   },
   // 表单配置规则
   schemas: {
     type: [Array] as PropType<FormSchema[]>,
-    default: () => [],
+    default: () => []
   },
   //布局方式
   layout: {
     type: String,
-    default: 'inline',
+    default: 'inline'
   },
   //是否展示为行内表单
   inline: {
     type: Boolean,
-    default: false,
+    default: false
   },
   //大小
   size: {
     type: String,
-    default: 'medium',
+    default: 'medium'
   },
   //标签位置
   labelPlacement: {
     type: String,
-    default: 'left',
+    default: 'left'
   },
   //组件是否width 100%
   isFull: {
     type: Boolean,
-    default: true,
+    default: true
   },
   //是否显示操作按钮（查询/重置）
   showActionButtonGroup: propTypes.bool.def(true),
@@ -54,18 +54,18 @@ export const basicProps = {
   // 确认按钮文字
   submitButtonText: {
     type: String,
-    default: '查询',
+    default: '查询'
   },
   showCancelButton: propTypes.bool.def(true),
   // 取消按钮文字
   cancelButtonText: {
     type: String,
-    default: '取消',
+    default: '取消'
   },
   //重置按钮文字
   resetButtonText: {
     type: String,
-    default: '重置',
+    default: '重置'
   },
   //grid 配置
   gridProps: Object as PropType<GridProps>,
@@ -73,16 +73,16 @@ export const basicProps = {
   giProps: Object as PropType<GridItemProps>,
   //grid 样式
   baseGridStyle: {
-    type: Object as PropType<CSSProperties>,
+    type: Object as PropType<CSSProperties>
   },
   //是否折叠
   collapsed: {
     type: Boolean,
-    default: false,
+    default: false
   },
   //默认展示的行数
   collapsedRows: {
     type: Number,
-    default: 1,
-  },
-};
+    default: 1
+  }
+}

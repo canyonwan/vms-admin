@@ -1,18 +1,18 @@
-import { h } from 'vue';
-import { NTag } from 'naive-ui';
+import { h } from 'vue'
+import { NTag } from 'naive-ui'
 
 export const columns = [
   {
     title: 'id',
-    key: 'id',
+    key: 'id'
   },
   {
     title: '角色名称',
-    key: 'name',
+    key: 'name'
   },
   {
     title: '说明',
-    key: 'explain',
+    key: 'explain'
   },
   {
     title: '是否默认角色',
@@ -21,16 +21,16 @@ export const columns = [
       return h(
         NTag,
         {
-          type: row.isDefault ? 'success' : 'error',
+          type: row.isDefault ? 'success' : 'error'
         },
         {
-          default: () => (row.isDefault ? '是' : '否'),
+          default: () => (row.isDefault ? '是' : '否')
         }
-      );
-    },
+      )
+    }
   },
   {
     title: '创建时间',
-    key: 'create_date',
-  },
-];
+    key: 'create_date'
+  }
+]

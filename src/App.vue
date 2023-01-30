@@ -1,11 +1,5 @@
 <template>
-  <NConfigProvider
-    v-if="!isLock"
-    :locale="zhCN"
-    :theme="getDarkTheme"
-    :theme-overrides="getThemeOverrides"
-    :date-locale="dateZhCN"
-  >
+  <NConfigProvider v-if="!isLock" :locale="zhCN" :theme="getDarkTheme" :theme-overrides="getThemeOverrides" :date-locale="dateZhCN">
     <AppProvider>
       <RouterView />
     </AppProvider>
@@ -17,69 +11,69 @@
 </template>
 
 <script lang="ts" setup>
-  import { computed, onMounted, onUnmounted } from 'vue';
-  import { zhCN, dateZhCN, darkTheme } from 'naive-ui';
-  import { LockScreen } from '@/components/Lockscreen';
-  import { AppProvider } from '@/components/Application';
-  import { useLockscreenStore } from '@/store/modules/lockscreen';
-  import { useRoute } from 'vue-router';
-  import { useDesignSettingStore } from '@/store/modules/designSetting';
-  import { lighten } from '@/utils/index';
+  import { computed, onMounted, onUnmounted } from 'vue'
+  import { zhCN, dateZhCN, darkTheme } from 'naive-ui'
+  import { LockScreen } from '@/components/Lockscreen'
+  import { AppProvider } from '@/components/Application'
+  import { useLockscreenStore } from '@/store/modules/lockscreen'
+  import { useRoute } from 'vue-router'
+  import { useDesignSettingStore } from '@/store/modules/designSetting'
+  import { lighten } from '@/utils'
 
-  const route = useRoute();
-  const useLockscreen = useLockscreenStore();
-  const designStore = useDesignSettingStore();
-  const isLock = computed(() => useLockscreen.isLock);
-  const lockTime = computed(() => useLockscreen.lockTime);
+  const route = useRoute()
+  const useLockscreen = useLockscreenStore()
+  const designStore = useDesignSettingStore()
+  const isLock = computed(() => useLockscreen.isLock)
+  const lockTime = computed(() => useLockscreen.lockTime)
 
   /**
    * @type import('naive-ui').GlobalThemeOverrides
    */
   const getThemeOverrides = computed(() => {
-    const appTheme = designStore.appTheme;
-    const lightenStr = lighten(designStore.appTheme, 6);
+    const appTheme = designStore.appTheme
+    const lightenStr = lighten(designStore.appTheme, 6)
     return {
       common: {
         primaryColor: appTheme,
         primaryColorHover: lightenStr,
         primaryColorPressed: lightenStr,
-        primaryColorSuppl: appTheme,
+        primaryColorSuppl: appTheme
       },
       LoadingBar: {
-        colorLoading: appTheme,
-      },
-    };
-  });
+        colorLoading: appTheme
+      }
+    }
+  })
 
-  const getDarkTheme = computed(() => (designStore.darkTheme ? darkTheme : undefined));
+  const getDarkTheme = computed(() => (designStore.darkTheme ? darkTheme : undefined))
 
-  let timer;
+  let timer
 
   const timekeeping = () => {
-    clearInterval(timer);
-    if (route.name == 'login' || isLock.value) return;
+    clearInterval(timer)
+    if (route.name == 'login' || isLock.value) return
     // 设置不锁屏
-    useLockscreen.setLock(false);
+    useLockscreen.setLock(false)
     // 重置锁屏时间
-    useLockscreen.setLockTime();
+    useLockscreen.setLockTime()
     timer = setInterval(() => {
       // 锁屏倒计时递减
-      useLockscreen.setLockTime(lockTime.value - 1);
+      useLockscreen.setLockTime(lockTime.value - 1)
       if (lockTime.value <= 0) {
         // 设置锁屏
-        useLockscreen.setLock(true);
-        return clearInterval(timer);
+        useLockscreen.setLock(true)
+        return clearInterval(timer)
       }
-    }, 1000);
-  };
+    }, 1000)
+  }
 
   onMounted(() => {
-    document.addEventListener('mousedown', timekeeping);
-  });
+    document.addEventListener('mousedown', timekeeping)
+  })
 
   onUnmounted(() => {
-    document.removeEventListener('mousedown', timekeeping);
-  });
+    document.removeEventListener('mousedown', timekeeping)
+  })
 </script>
 
 <style lang="less">

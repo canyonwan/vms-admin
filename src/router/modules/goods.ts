@@ -1,7 +1,7 @@
-import { RouteRecordRaw } from 'vue-router';
-import { Layout } from '@/router/constant';
-import { OptionsSharp } from '@vicons/ionicons5';
-import { renderIcon } from '@/utils/index';
+import { RouteRecordRaw } from 'vue-router'
+import { Layout } from '@/router/constant'
+import { OptionsSharp } from '@vicons/ionicons5'
+import { renderIcon } from '@/utils/index'
 
 /**
  * @param name 路由名称, 必须设置,且不能重名
@@ -25,6 +25,7 @@ const routes: Array<RouteRecordRaw> = [
       icon: renderIcon(OptionsSharp),
       permissions: ['goods_list'],
       sort: 1,
+      isRoot: false
     },
     children: [
       {
@@ -33,11 +34,12 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '我的商品',
           permissions: ['goods_list'],
+          isRoot: false
         },
-        component: () => import('@/views/goods/menu/menu.vue'),
-      },
-    ],
-  },
-];
+        component: () => import('@/views/goods/menu/menu.vue')
+      }
+    ]
+  }
+]
 
-export default routes;
+export default routes

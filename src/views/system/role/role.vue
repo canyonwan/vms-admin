@@ -63,33 +63,33 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, ref, unref, h, onMounted } from 'vue';
-  import { useMessage } from 'naive-ui';
-  import { BasicTable, TableAction } from '@/components/Table';
-  import { getRoleList } from '@/api/system/role';
+  import { reactive, ref, unref, h, onMounted } from 'vue'
+  import { useMessage } from 'naive-ui'
+  import { BasicTable, TableAction } from '@/components/Table'
+  import { getRoleList } from '@/api/system/role'
   // import { getMenuList } from '@/api/system/menu';
-  import { columns } from './columns';
-  import { PlusOutlined } from '@vicons/antd';
-  import { getTreeAll } from '@/utils';
-  import { useRouter } from 'vue-router';
+  import { columns } from './columns'
+  import { PlusOutlined } from '@vicons/antd'
+  import { getTreeAll } from '@/utils'
+  import { useRouter } from 'vue-router'
 
-  const router = useRouter();
-  const formRef: any = ref(null);
-  const message = useMessage();
-  const actionRef = ref();
+  const router = useRouter()
+  const formRef: any = ref(null)
+  const message = useMessage()
+  const actionRef = ref()
 
-  const showModal = ref(false);
-  const formBtnLoading = ref(false);
-  const checkedAll = ref(false);
-  const editRoleTitle = ref('');
-  const treeData = ref([]);
-  const expandedKeys = ref([]);
-  const checkedKeys = ref(['console', 'step-form']);
+  const showModal = ref(false)
+  const formBtnLoading = ref(false)
+  const checkedAll = ref(false)
+  const editRoleTitle = ref('')
+  const treeData = ref([])
+  const expandedKeys = ref([])
+  const checkedKeys = ref(['console', 'step-form'])
 
   const params = reactive({
     pageSize: 5,
-    name: 'xiaoMa',
-  });
+    name: 'xiaoMa'
+  })
 
   const actionColumn = reactive({
     width: 250,
@@ -105,106 +105,106 @@
             onClick: handleMenuAuth.bind(null, record),
             // 根据业务控制是否显示 isShow 和 auth 是并且关系
             ifShow: () => {
-              return true;
+              return true
             },
             // 根据权限控制是否显示: 有权限，会显示，支持多个
-            auth: ['basic_list'],
+            auth: ['basic_list']
           },
           {
             label: '编辑',
             onClick: handleEdit.bind(null, record),
             ifShow: () => {
-              return true;
+              return true
             },
-            auth: ['basic_list'],
+            auth: ['basic_list']
           },
           {
             label: '删除',
             onClick: handleDelete.bind(null, record),
             // 根据业务控制是否显示 isShow 和 auth 是并且关系
             ifShow: () => {
-              return true;
+              return true
             },
             // 根据权限控制是否显示: 有权限，会显示，支持多个
-            auth: ['basic_list'],
-          },
-        ],
-      });
-    },
-  });
+            auth: ['basic_list']
+          }
+        ]
+      })
+    }
+  })
 
   const loadDataTable = async (res: any) => {
     let _params = {
       ...unref(params),
-      ...res,
-    };
-    return await getRoleList(_params);
-  };
+      ...res
+    }
+    return await getRoleList(_params)
+  }
 
   function onCheckedRow(rowKeys: any[]) {
-    console.log(rowKeys);
+    console.log(rowKeys)
   }
 
   function reloadTable() {
-    actionRef.value.reload();
+    actionRef.value.reload()
   }
 
   function confirmForm(e: any) {
-    e.preventDefault();
-    formBtnLoading.value = true;
+    e.preventDefault()
+    formBtnLoading.value = true
     formRef.value.validate((errors) => {
       if (!errors) {
-        message.success('新建成功');
+        message.success('新建成功')
         setTimeout(() => {
-          showModal.value = false;
-          reloadTable();
-        });
+          showModal.value = false
+          reloadTable()
+        })
       } else {
-        message.error('请填写完整信息');
+        message.error('请填写完整信息')
       }
-      formBtnLoading.value = false;
-    });
+      formBtnLoading.value = false
+    })
   }
 
   function handleEdit(record: Recordable) {
-    console.log('点击了编辑', record);
-    router.push({ name: 'basic-info', params: { id: record.id } });
+    console.log('点击了编辑', record)
+    router.push({ name: 'basic-info', params: { id: record.id } })
   }
 
   function handleDelete(record: Recordable) {
-    console.log('点击了删除', record);
-    message.info('点击了删除');
+    console.log('点击了删除', record)
+    message.info('点击了删除')
   }
 
   function handleMenuAuth(record: Recordable) {
-    editRoleTitle.value = `分配 ${record.name} 的菜单权限`;
-    checkedKeys.value = record.menu_keys;
-    showModal.value = true;
+    editRoleTitle.value = `分配 ${record.name} 的菜单权限`
+    checkedKeys.value = record.menu_keys
+    showModal.value = true
   }
 
   function checkedTree(keys) {
-    checkedKeys.value = [checkedKeys.value, ...keys];
+    checkedKeys.value = [checkedKeys.value, ...keys]
   }
 
   function onExpandedKeys(keys) {
-    expandedKeys.value = keys;
+    expandedKeys.value = keys
   }
 
   function packHandle() {
     if (expandedKeys.value.length) {
-      expandedKeys.value = [];
+      expandedKeys.value = []
     } else {
-      expandedKeys.value = treeData.value.map((item: any) => item.key) as [];
+      expandedKeys.value = treeData.value.map((item: any) => item.key) as []
     }
   }
 
   function checkedAllHandle() {
     if (!checkedAll.value) {
-      checkedKeys.value = getTreeAll(treeData.value);
-      checkedAll.value = true;
+      checkedKeys.value = getTreeAll(treeData.value)
+      checkedAll.value = true
     } else {
-      checkedKeys.value = [];
-      checkedAll.value = false;
+      checkedKeys.value = []
+      checkedAll.value = false
     }
   }
 
@@ -212,7 +212,7 @@
     // const treeMenuList = await getMenuList();
     // expandedKeys.value = treeMenuList.list.map((item) => item.key);
     // treeData.value = treeMenuList.list;
-  });
+  })
 </script>
 
 <style lang="less" scoped></style>

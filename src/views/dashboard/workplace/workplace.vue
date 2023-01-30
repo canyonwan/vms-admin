@@ -299,7 +299,7 @@
 </template>
 
 <script lang="ts" setup>
-  import schoolboy from '@/assets/images/schoolboy.png';
+  import schoolboy from '@/assets/images/schoolboy.png'
   import {
     GithubOutlined,
     DashboardOutlined,
@@ -307,9 +307,9 @@
     FileProtectOutlined,
     SettingOutlined,
     ApartmentOutlined,
-    Html5Outlined,
-  } from '@vicons/antd';
-  import { LogoVue, LogoAngular, LogoReact, LogoJavascript } from '@vicons/ionicons5';
+    Html5Outlined
+  } from '@vicons/antd'
+  import { LogoVue, LogoAngular, LogoReact, LogoJavascript } from '@vicons/ionicons5'
 </script>
 
 <style lang="less" scoped>

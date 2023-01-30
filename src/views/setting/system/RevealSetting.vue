@@ -89,74 +89,74 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, ref, toRefs } from 'vue';
-  import { useDialog, useMessage } from 'naive-ui';
+  import { defineComponent, reactive, ref, toRefs } from 'vue'
+  import { useDialog, useMessage } from 'naive-ui'
 
   const rules = {
     name: {
       required: true,
       message: '请输入网站名称',
-      trigger: 'blur',
+      trigger: 'blur'
     },
     mobile: {
       required: true,
       message: '请输入联系电话',
-      trigger: 'input',
-    },
-  };
+      trigger: 'input'
+    }
+  }
   const watermarkPlaceList = [
     {
       label: '左上',
-      value: 1,
+      value: 1
     },
     {
       label: '右上',
-      value: 2,
+      value: 2
     },
     {
       label: '居中',
-      value: 3,
+      value: 3
     },
     {
       label: '右下',
-      value: 4,
-    },
-  ];
+      value: 4
+    }
+  ]
 
   const pricePreciseNumList = [
     {
       label: '2位',
-      value: 1,
+      value: 1
     },
     {
       label: '3位',
-      value: 2,
+      value: 2
     },
     {
       label: '4位',
-      value: 3,
-    },
-  ];
+      value: 3
+    }
+  ]
   const pricePreciseList = [
     {
       label: '四舍五入',
-      value: 1,
+      value: 1
     },
     {
       label: '向上取整',
-      value: 2,
+      value: 2
     },
     {
       label: '向下取整',
-      value: 3,
-    },
-  ];
+      value: 3
+    }
+  ]
 
   export default defineComponent({
     setup() {
-      const formRef: any = ref(null);
-      const message = useMessage();
-      const dialog = useDialog();
+      const formRef: any = ref(null)
+      const message = useMessage()
+      const dialog = useDialog()
 
       const state = reactive({
         formValue: {
@@ -167,9 +167,9 @@
           watermarkClarity: null,
           pricePrecise: 1,
           isMarketPrice: true,
-          pricePreciseNum: null,
-        },
-      });
+          pricePreciseNum: null
+        }
+      })
 
       function systemOpenChange(value) {
         if (!value) {
@@ -179,27 +179,27 @@
             positiveText: '确定',
             negativeText: '取消',
             onPositiveClick: () => {
-              message.success('操作成功');
+              message.success('操作成功')
             },
             onNegativeClick: () => {
-              state.formValue.systemOpen = true;
-            },
-          });
+              state.formValue.systemOpen = true
+            }
+          })
         }
       }
 
       function formSubmit() {
         formRef.value.validate((errors) => {
           if (!errors) {
-            message.success('验证成功');
+            message.success('验证成功')
           } else {
-            message.error('验证失败，请填写完整信息');
+            message.error('验证失败，请填写完整信息')
           }
-        });
+        })
       }
 
       function resetForm() {
-        formRef.value.restoreValidation();
+        formRef.value.restoreValidation()
       }
 
       return {
@@ -211,8 +211,8 @@
         rules,
         formSubmit,
         resetForm,
-        systemOpenChange,
-      };
-    },
-  });
+        systemOpenChange
+      }
+    }
+  })
 </script>

@@ -224,10 +224,10 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref, onMounted } from 'vue';
-  import { getConsoleInfo } from '@/api/dashboard/console';
-  import VisiTab from './components/VisiTab.vue';
-  import { CountTo } from '@/components/CountTo/index';
+  import { ref, onMounted } from 'vue'
+  import { getConsoleInfo } from '@/api/dashboard/console'
+  import VisiTab from './components/VisiTab.vue'
+  import { CountTo } from '@/components/CountTo/index'
   import {
     CaretUpOutlined,
     CaretDownOutlined,
@@ -238,14 +238,14 @@
     CreditCardOutlined,
     MailOutlined,
     TagsOutlined,
-    SettingOutlined,
-  } from '@vicons/antd';
+    SettingOutlined
+  } from '@vicons/antd'
 
-  const loading = ref(true);
-  const visits = ref<any>({});
-  const saleroom = ref<any>({});
-  const orderLarge = ref<any>({});
-  const volume = ref({});
+  const loading = ref(true)
+  const visits = ref<any>({})
+  const saleroom = ref<any>({})
+  const orderLarge = ref<any>({})
+  const volume = ref({})
 
   // 图标列表
   const iconList = [
@@ -255,8 +255,8 @@
       title: '用户',
       color: '#69c0ff',
       eventObject: {
-        click: () => {},
-      },
+        click: () => {}
+      }
     },
     {
       icon: BarChartOutlined,
@@ -264,8 +264,8 @@
       title: '分析',
       color: '#69c0ff',
       eventObject: {
-        click: () => {},
-      },
+        click: () => {}
+      }
     },
     {
       icon: ShoppingCartOutlined,
@@ -273,8 +273,8 @@
       title: '商品',
       color: '#ff9c6e',
       eventObject: {
-        click: () => {},
-      },
+        click: () => {}
+      }
     },
     {
       icon: AccountBookOutlined,
@@ -282,8 +282,8 @@
       title: '订单',
       color: '#b37feb',
       eventObject: {
-        click: () => {},
-      },
+        click: () => {}
+      }
     },
     {
       icon: CreditCardOutlined,
@@ -291,8 +291,8 @@
       title: '票据',
       color: '#ffd666',
       eventObject: {
-        click: () => {},
-      },
+        click: () => {}
+      }
     },
     {
       icon: MailOutlined,
@@ -300,8 +300,8 @@
       title: '消息',
       color: '#5cdbd3',
       eventObject: {
-        click: () => {},
-      },
+        click: () => {}
+      }
     },
     {
       icon: TagsOutlined,
@@ -309,8 +309,8 @@
       title: '标签',
       color: '#ff85c0',
       eventObject: {
-        click: () => {},
-      },
+        click: () => {}
+      }
     },
     {
       icon: SettingOutlined,
@@ -318,10 +318,10 @@
       title: '配置',
       color: '#ffc069',
       eventObject: {
-        click: () => {},
-      },
-    },
-  ];
+        click: () => {}
+      }
+    }
+  ]
 
   // onMounted(async () => {
   //   const data = await getConsoleInfo();

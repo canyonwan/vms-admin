@@ -29,43 +29,43 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, ref } from 'vue';
-  import { useMessage } from 'naive-ui';
+  import { reactive, ref } from 'vue'
+  import { useMessage } from 'naive-ui'
 
   const rules = {
     name: {
       required: true,
       message: '请输入昵称',
-      trigger: 'blur',
+      trigger: 'blur'
     },
     email: {
       required: true,
       message: '请输入邮箱',
-      trigger: 'blur',
+      trigger: 'blur'
     },
     mobile: {
       required: true,
       message: '请输入联系电话',
-      trigger: 'input',
-    },
-  };
-  const formRef: any = ref(null);
-  const message = useMessage();
+      trigger: 'input'
+    }
+  }
+  const formRef: any = ref(null)
+  const message = useMessage()
 
   const formValue = reactive({
     name: '',
     mobile: '',
     email: '',
-    address: '',
-  });
+    address: ''
+  })
 
   function formSubmit() {
     formRef.value.validate((errors) => {
       if (!errors) {
-        message.success('验证成功');
+        message.success('验证成功')
       } else {
-        message.error('验证失败，请填写完整信息');
+        message.error('验证失败，请填写完整信息')
       }
-    });
+    })
   }
 </script>

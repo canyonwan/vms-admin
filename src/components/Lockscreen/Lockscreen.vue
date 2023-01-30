@@ -75,24 +75,24 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, reactive, toRefs } from 'vue';
-  import { ResultEnum } from '@/enums/httpEnum';
-  import recharge from './Recharge.vue';
+  import { defineComponent, reactive, toRefs } from 'vue'
+  import { ResultEnum } from '@/enums/httpEnum'
+  import recharge from './Recharge.vue'
   import {
     LockOutlined,
     LoadingOutlined,
     UserOutlined,
     ApiOutlined,
     ArrowRightOutlined,
-    WifiOutlined,
-  } from '@vicons/antd';
+    WifiOutlined
+  } from '@vicons/antd'
 
-  import { useRouter, useRoute } from 'vue-router';
-  import { useOnline } from '@/hooks/useOnline';
-  import { useTime } from '@/hooks/useTime';
-  import { useBattery } from '@/hooks/useBattery';
-  import { useLockscreenStore } from '@/store/modules/lockscreen';
-  import { useUserStore } from '@/store/modules/user';
+  import { useRouter, useRoute } from 'vue-router'
+  import { useOnline } from '@/hooks/useOnline'
+  import { useTime } from '@/hooks/useTime'
+  import { useBattery } from '@/hooks/useBattery'
+  import { useLockscreenStore } from '@/store/modules/lockscreen'
+  import { useUserStore } from '@/store/modules/user'
 
   export default defineComponent({
     name: 'Lockscreen',
@@ -103,22 +103,22 @@
       ArrowRightOutlined,
       ApiOutlined,
       WifiOutlined,
-      recharge,
+      recharge
     },
     setup() {
-      const useLockscreen = useLockscreenStore();
-      const userStore = useUserStore();
+      const useLockscreen = useLockscreenStore()
+      const userStore = useUserStore()
 
       // 获取时间
-      const { month, day, hour, minute, second, week } = useTime();
-      const { online } = useOnline();
+      const { month, day, hour, minute, second, week } = useTime()
+      const { online } = useOnline()
 
-      const router = useRouter();
-      const route = useRoute();
+      const router = useRouter()
+      const route = useRoute()
 
-      const { battery, batteryStatus, calcDischargingTime, calcChargingTime } = useBattery();
-      const userInfo: object = userStore.getUserInfo || {};
-      const username = userInfo['username'] || '';
+      const { battery, batteryStatus, calcDischargingTime, calcChargingTime } = useBattery()
+      const userInfo: object = userStore.getUserInfo || {}
+      const username = userInfo['username'] || ''
       const state = reactive({
         showLogin: false,
         loginLoading: false, // 正在登录
@@ -127,45 +127,45 @@
         loginParams: {
           // username: username || '',
           account: username || '',
-          password: '',
-        },
-      });
+          password: ''
+        }
+      })
 
       // 解锁登录
-      const onLockLogin = (value: boolean) => (state.showLogin = value);
+      const onLockLogin = (value: boolean) => (state.showLogin = value)
 
       // 登录
       const onLogin = async () => {
         if (!state.loginParams.password.trim()) {
-          return;
+          return
         }
         const params = {
           isLock: true,
-          ...state.loginParams,
-        };
-        state.loginLoading = true;
-        const { code, message } = await userStore.login(params);
-        if (code === ResultEnum.SUCCESS) {
-          onLockLogin(false);
-          useLockscreen.setLock(false);
-        } else {
-          state.errorMsg = message;
-          state.isLoginError = true;
+          ...state.loginParams
         }
-        state.loginLoading = false;
-      };
+        state.loginLoading = true
+        const { code, message } = await userStore.login(params)
+        if (code === ResultEnum.SUCCESS) {
+          onLockLogin(false)
+          useLockscreen.setLock(false)
+        } else {
+          state.errorMsg = message
+          state.isLoginError = true
+        }
+        state.loginLoading = false
+      }
 
       //重新登录
       const goLogin = () => {
-        onLockLogin(false);
-        useLockscreen.setLock(false);
+        onLockLogin(false)
+        useLockscreen.setLock(false)
         router.replace({
           path: '/login',
           query: {
-            redirect: route.fullPath,
-          },
-        });
-      };
+            redirect: route.fullPath
+          }
+        })
+      }
 
       return {
         ...toRefs(state),
@@ -182,10 +182,10 @@
         calcChargingTime,
         onLockLogin,
         onLogin,
-        goLogin,
-      };
-    },
-  });
+        goLogin
+      }
+    }
+  })
 </script>
 
 <style lang="less" scoped>

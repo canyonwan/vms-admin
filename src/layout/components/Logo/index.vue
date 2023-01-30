@@ -6,20 +6,20 @@
 </template>
 
 <script lang="ts">
-  import { websiteConfig } from '@/config/website.config';
+  import { websiteConfig } from '@/config/website.config'
   export default {
     name: 'Index',
     props: {
       collapsed: {
-        type: Boolean,
-      },
+        type: Boolean
+      }
     },
     data() {
       return {
-        websiteConfig,
-      };
-    },
-  };
+        websiteConfig
+      }
+    }
+  }
 </script>
 
 <style lang="less" scoped>

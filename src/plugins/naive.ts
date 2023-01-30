@@ -1,5 +1,5 @@
-import type { App } from 'vue';
-import * as NaiveUI from 'naive-ui';
+import type { App } from 'vue'
+import * as NaiveUI from 'naive-ui'
 
 const naive = NaiveUI.create({
   components: [
@@ -67,10 +67,10 @@ const naive = NaiveUI.create({
     NaiveUI.NSpin,
     NaiveUI.NTimePicker,
     NaiveUI.NBackTop,
-    NaiveUI.NSkeleton,
-  ],
-});
+    NaiveUI.NSkeleton
+  ]
+})
 
 export function setupNaive(app: App<Element>) {
-  app.use(naive);
+  app.use(naive)
 }

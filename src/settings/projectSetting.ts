@@ -12,7 +12,7 @@ const setting = {
     //固定顶部
     fixed: true,
     //显示重载按钮
-    isReload: true,
+    isReload: true
   },
   //页脚
   showFooter: true,
@@ -23,7 +23,7 @@ const setting = {
     //是否显示
     show: true,
     //固定多标签
-    fixed: true,
+    fixed: true
   },
   //菜单
   menuSetting: {
@@ -38,20 +38,20 @@ const setting = {
     //触发移动端侧边栏的宽度
     mobileWidth: 800,
     // 折叠菜单
-    collapsed: false,
+    collapsed: false
   },
   //面包屑
   crumbsSetting: {
     //是否显示
     show: true,
     //显示图标
-    showIcon: false,
+    showIcon: false
   },
   //菜单权限模式 FIXED 前端固定路由  BACK 动态获取
   permissionMode: 'FIXED',
   //是否开启路由动画
   isPageAnimate: true,
   //路由动画类型
-  pageAnimateType: 'zoom-fade',
-};
-export default setting;
+  pageAnimateType: 'zoom-fade'
+}
+export default setting

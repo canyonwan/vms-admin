@@ -25,29 +25,29 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { ref } from 'vue';
-  import BasicSetting from './BasicSetting.vue';
-  import SafetySetting from './SafetySetting.vue';
+  import { ref } from 'vue'
+  import BasicSetting from './BasicSetting.vue'
+  import SafetySetting from './SafetySetting.vue'
 
   const typeTabList = [
     {
       name: '基本设置',
       desc: '个人账户信息设置',
-      key: 1,
+      key: 1
     },
     {
       name: '安全设置',
       desc: '密码，邮箱等设置',
-      key: 2,
-    },
-  ];
+      key: 2
+    }
+  ]
 
-  const type = ref(1);
-  const typeTitle = ref('基本设置');
+  const type = ref(1)
+  const typeTitle = ref('基本设置')
 
   function switchType(e) {
-    type.value = e.key;
-    typeTitle.value = e.name;
+    type.value = e.key
+    typeTitle.value = e.name
   }
 </script>
 <style lang="less" scoped>

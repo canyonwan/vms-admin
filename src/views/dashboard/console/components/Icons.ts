@@ -8,8 +8,8 @@ import {
   CreditCardOutlined,
   MailOutlined,
   TagsOutlined,
-  SettingOutlined,
-} from '@vicons/antd';
+  SettingOutlined
+} from '@vicons/antd'
 
 export default {
   CaretUpOutlined,
@@ -21,5 +21,5 @@ export default {
   CreditCardOutlined,
   MailOutlined,
   TagsOutlined,
-  SettingOutlined,
-};
+  SettingOutlined
+}

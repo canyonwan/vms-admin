@@ -1,7 +1,7 @@
-import { RouteRecordRaw } from 'vue-router';
-import { Layout } from '@/router/constant';
-import { OptionsSharp } from '@vicons/ionicons5';
-import { renderIcon } from '@/utils/index';
+import { RouteRecordRaw } from 'vue-router'
+import { Layout } from '@/router/constant'
+import { OptionsSharp } from '@vicons/ionicons5'
+import { renderIcon } from '@/utils/index'
 
 /**
  * @param name 路由名称, 必须设置,且不能重名
@@ -23,7 +23,8 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: '系统设置',
       icon: renderIcon(OptionsSharp),
-      sort: 1,
+      permissions: ['system'],
+      sort: 2
     },
     children: [
       {
@@ -31,19 +32,30 @@ const routes: Array<RouteRecordRaw> = [
         name: 'system_menu',
         meta: {
           title: '菜单权限管理',
+          permissions: ['system_menu']
         },
-        component: () => import('@/views/system/menu/menu.vue'),
+        component: () => import('@/views/system/menu/menu.vue')
       },
       {
         path: 'role',
         name: 'system_role',
         meta: {
           title: '角色权限管理',
+          permissions: ['system_role']
         },
-        component: () => import('@/views/system/role/role.vue'),
+        component: () => import('@/views/system/role/role.vue')
       },
-    ],
-  },
-];
+      {
+        path: 'user',
+        name: 'system_user',
+        meta: {
+          title: '用户管理',
+          permissions: ['system_user']
+        },
+        component: () => import('@/views/system/user/user.vue')
+      }
+    ]
+  }
+]
 
-export default routes;
+export default routes

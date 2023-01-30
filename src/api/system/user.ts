@@ -1,15 +1,17 @@
-import { http } from '@/utils/http/axios';
+import { http } from '@/utils/http/axios'
+import { IUserItem } from './types'
+import { IResultPage } from '@/utils/http/axios/types'
 
 export interface BasicResponseModel<T = any> {
-  code: number;
-  message: string;
-  data: T;
+  code: number
+  message: string
+  data: T
 }
 
 export interface BasicPageParams {
-  page: number;
-  size: number;
-  total: number;
+  page: number
+  size: number
+  total: number
 }
 
 /**
@@ -18,19 +20,19 @@ export interface BasicPageParams {
 export function getUserInfo() {
   return http.request({
     url: 'user/info',
-    method: 'get',
-  });
+    method: 'get'
+  })
 }
 
 /**
  * @description: 获取用户列表
  */
-export function getUserList(params: BasicPageParams) {
+export function getUserList(params: BasicPageParams): Promise<IResultPage<IUserItem[]>> {
   return http.request({
     url: 'user/page',
     method: 'get',
-    params,
-  });
+    params
+  })
 }
 
 /**
@@ -41,12 +43,12 @@ export function login(params) {
     {
       url: 'login',
       method: 'post',
-      params,
+      params
     },
     {
-      isTransformResponse: false,
+      isTransformResponse: false
     }
-  );
+  )
 }
 
 /**
@@ -57,12 +59,12 @@ export function changePassword(params, uid) {
     {
       url: `/user/u${uid}/changepw`,
       method: 'POST',
-      params,
+      params
     },
     {
-      isTransformResponse: false,
+      isTransformResponse: false
     }
-  );
+  )
 }
 
 /**
@@ -72,6 +74,6 @@ export function logout(params) {
   return http.request({
     url: '/login/logout',
     method: 'POST',
-    params,
-  });
+    params
+  })
 }
