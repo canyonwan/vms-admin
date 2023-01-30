@@ -9,12 +9,8 @@
     </div>
     <div class="charging">
       <div>{{ batteryStatus }}</div>
-      <div v-show="Number.isFinite(battery.dischargingTime) && battery.dischargingTime != 0">
-        剩余可使用时间：{{ calcDischargingTime }}
-      </div>
-      <span v-show="Number.isFinite(battery.chargingTime) && battery.chargingTime != 0">
-        距离电池充满需要：{{ calcChargingTime }}
-      </span>
+      <div v-show="Number.isFinite(battery.dischargingTime) && battery.dischargingTime != 0"> 剩余可使用时间：{{ calcDischargingTime }} </div>
+      <span v-show="Number.isFinite(battery.chargingTime) && battery.chargingTime != 0"> 距离电池充满需要：{{ calcChargingTime }} </span>
     </div>
   </div>
 </template>

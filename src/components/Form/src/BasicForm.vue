@@ -18,24 +18,14 @@
 
           <!--判断插槽-->
           <template v-if="schema.slot">
-            <slot
-              :name="schema.slot"
-              :model="formModel"
-              :field="schema.field"
-              :value="formModel[schema.field]"
-            ></slot>
+            <slot :name="schema.slot" :model="formModel" :field="schema.field" :value="formModel[schema.field]"></slot>
           </template>
 
           <!--NCheckbox-->
           <template v-else-if="schema.component === 'NCheckbox'">
             <n-checkbox-group v-model:value="formModel[schema.field]">
               <n-space>
-                <n-checkbox
-                  v-for="item in schema.componentProps.options"
-                  :key="item.value"
-                  :value="item.value"
-                  :label="item.label"
-                />
+                <n-checkbox v-for="item in schema.componentProps.options" :key="item.value" :value="item.value" :label="item.label" />
               </n-space>
             </n-checkbox-group>
           </template>
@@ -44,75 +34,27 @@
           <template v-else-if="schema.component === 'NRadioGroup'">
             <n-radio-group v-model:value="formModel[schema.field]">
               <n-space>
-                <n-radio
-                  v-for="item in schema.componentProps.options"
-                  :key="item.value"
-                  :value="item.value"
-                >
+                <n-radio v-for="item in schema.componentProps.options" :key="item.value" :value="item.value">
                   {{ item.label }}
                 </n-radio>
               </n-space>
             </n-radio-group>
           </template>
           <!--动态渲染表单组件-->
-          <component
-            v-else
-            v-bind="getComponentProps(schema)"
-            :is="schema.component"
-            v-model:value="formModel[schema.field]"
-            :class="{ isFull: schema.isFull != false && getProps.isFull }"
-          />
+          <component v-else v-bind="getComponentProps(schema)" :is="schema.component" v-model:value="formModel[schema.field]" :class="{ isFull: schema.isFull != false && getProps.isFull }" />
           <!--组件后面的内容-->
           <template v-if="schema.suffix">
-            <slot
-              :name="schema.suffix"
-              :model="formModel"
-              :field="schema.field"
-              :value="formModel[schema.field]"
-            ></slot>
+            <slot :name="schema.suffix" :model="formModel" :field="schema.field" :value="formModel[schema.field]"></slot>
           </template>
         </n-form-item>
       </n-gi>
       <!--提交 重置 展开 收起 按钮-->
-      <n-gi
-        :span="isInline ? '' : 24"
-        :suffix="isInline ? true : false"
-        #="{ overflow }"
-        v-if="getProps.showActionButtonGroup"
-      >
-        <n-space
-          align="center"
-          :justify="getProps.buttonPosition"
-          :style="{ 'margin-left': `${isInline ? 12 : getProps.labelWidth}px` }"
-        >
-          <n-button
-            v-if="getProps.showSubmitButton"
-            v-bind="getSubmitBtnOptions"
-            @click="handleSubmit"
-            :loading="loadingSub"
-            >{{ getProps.submitButtonText }}
-          </n-button>
-          <n-button
-            ghost
-            v-if="getProps.showCancelButton"
-            v-bind="getSubmitBtnOptions"
-            @click="handleCancel"
-            :loading="loadingSub"
-            >{{ getProps.cancelButtonText }}
-          </n-button>
-          <n-button
-            v-if="getProps.showResetButton"
-            v-bind="getResetBtnOptions"
-            @click="resetFields"
-            >{{ getProps.resetButtonText }}</n-button
-          >
-          <n-button
-            type="primary"
-            text
-            icon-placement="right"
-            v-if="isInline && getProps.showAdvancedButton"
-            @click="unfoldToggle"
-          >
+      <n-gi :span="isInline ? '' : 24" :suffix="isInline ? true : false" #="{ overflow }" v-if="getProps.showActionButtonGroup">
+        <n-space align="center" :justify="getProps.buttonPosition" :style="{ 'margin-left': `${isInline ? 12 : getProps.labelWidth}px` }">
+          <n-button v-if="getProps.showSubmitButton" v-bind="getSubmitBtnOptions" @click="handleSubmit" :loading="loadingSub">{{ getProps.submitButtonText }} </n-button>
+          <n-button ghost v-if="getProps.showCancelButton" v-bind="getSubmitBtnOptions" @click="handleCancel" :loading="loadingSub">{{ getProps.cancelButtonText }} </n-button>
+          <n-button v-if="getProps.showResetButton" v-bind="getResetBtnOptions" @click="resetFields">{{ getProps.resetButtonText }}</n-button>
+          <n-button type="primary" text icon-placement="right" v-if="isInline && getProps.showAdvancedButton" @click="unfoldToggle">
             <template #icon>
               <n-icon size="14" class="unfold-icon" v-if="overflow">
                 <DownOutlined />
@@ -220,9 +162,7 @@
         }
       })
 
-      const getBindValue = computed(
-        () => ({ ...attrs, ...props, ...unref(getProps) } as Recordable)
-      )
+      const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) } as Recordable))
 
       const getSchema = computed((): FormSchema[] => {
         const schemas: FormSchema[] = unref(schemaRef) || (unref(getProps).schemas as any)
@@ -243,15 +183,7 @@
         formModel
       })
 
-      const {
-        cancelButton,
-        handleSubmit,
-        validate,
-        resetFields,
-        getFieldsValue,
-        clearValidate,
-        setFieldsValue
-      } = useFormEvents({
+      const { cancelButton, handleSubmit, validate, resetFields, getFieldsValue, clearValidate, setFieldsValue } = useFormEvents({
         emit,
         getProps,
         formModel,
@@ -267,10 +199,7 @@
       }
 
       function handleCancel() {
-        console.log(
-          '%c [ BasicForm cancel ]-271',
-          'font-size:13px; background:pink; color:#bf2c9f;'
-        )
+        console.log('%c [ BasicForm cancel ]-271', 'font-size:13px; background:pink; color:#bf2c9f;')
       }
 
       async function setProps(formProps: Partial<FormProps>): Promise<void> {

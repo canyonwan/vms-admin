@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="n-layout-page-header">
-      <n-card :bordered="false" title="菜单权限管理">
-        页面数据为 Mock 示例数据，非真实数据。
-      </n-card>
+      <n-card :bordered="false" title="菜单权限管理"> 页面数据为 Mock 示例数据，非真实数据。 </n-card>
     </div>
     <n-grid class="mt-4" cols="1 s:1 m:1 l:3 xl:3 2xl:3" responsive="screen" :x-gap="12">
       <n-gi span="1">
@@ -77,15 +75,7 @@
             </n-space>
           </template>
           <n-alert type="info" closable> 从菜单列表选择一项后，进行编辑</n-alert>
-          <n-form
-            :model="formParams"
-            :rules="rules"
-            ref="formRef"
-            label-placement="left"
-            :label-width="100"
-            v-if="isEditMenu"
-            class="py-4"
-          >
+          <n-form :model="formParams" :rules="rules" ref="formRef" label-placement="left" :label-width="100" v-if="isEditMenu" class="py-4">
             <n-form-item label="类型" path="type">
               <span>{{ formParams.type === 1 ? '侧边栏菜单' : '' }}</span>
             </n-form-item>
@@ -111,9 +101,7 @@
             </n-form-item>
             <n-form-item path="auth" style="margin-left: 100px">
               <n-space>
-                <n-button type="primary" :loading="subLoading" @click="formSubmit"
-                  >保存修改</n-button
-                >
+                <n-button type="primary" :loading="subLoading" @click="formSubmit">保存修改</n-button>
                 <n-button @click="handleReset">重置</n-button>
                 <n-button @click="handleDel">删除</n-button>
               </n-space>

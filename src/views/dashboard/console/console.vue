@@ -3,12 +3,7 @@
     <!--数据卡片-->
     <n-grid cols="1 s:2 m:3 l:4 xl:4 2xl:4" responsive="screen" :x-gap="12" :y-gap="8">
       <n-grid-item>
-        <NCard
-          title="访问量"
-          :segmented="{ content: true, footer: true }"
-          size="small"
-          :bordered="false"
-        >
+        <NCard title="访问量" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
           <template #header-extra>
             <n-tag type="success">日</n-tag>
           </template>
@@ -52,33 +47,17 @@
         </NCard>
       </n-grid-item>
       <n-grid-item>
-        <NCard
-          title="销售额"
-          :segmented="{ content: true, footer: true }"
-          size="small"
-          :bordered="false"
-        >
+        <NCard title="销售额" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
           <template #header-extra>
             <n-tag type="info">周</n-tag>
           </template>
           <div class="py-1 px-1 flex justify-between">
             <n-skeleton v-if="loading" :width="100" size="medium" />
-            <CountTo
-              v-else
-              prefix="￥"
-              :startVal="1"
-              :endVal="saleroom.weekSaleroom"
-              class="text-3xl"
-            />
+            <CountTo v-else prefix="￥" :startVal="1" :endVal="saleroom.weekSaleroom" class="text-3xl" />
           </div>
           <div class="py-2 px-2 flex justify-between">
             <div class="text-sn flex-1">
-              <n-progress
-                type="line"
-                :percentage="saleroom.degree"
-                :indicator-placement="'inside'"
-                processing
-              />
+              <n-progress type="line" :percentage="saleroom.degree" :indicator-placement="'inside'" processing />
             </div>
           </div>
           <template #footer>
@@ -95,12 +74,7 @@
         </NCard>
       </n-grid-item>
       <n-grid-item>
-        <NCard
-          title="订单量"
-          :segmented="{ content: true, footer: true }"
-          size="small"
-          :bordered="false"
-        >
+        <NCard title="订单量" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
           <template #header-extra>
             <n-tag type="warning">周</n-tag>
           </template>
@@ -144,12 +118,7 @@
         </NCard>
       </n-grid-item>
       <n-grid-item>
-        <NCard
-          title="成交额"
-          :segmented="{ content: true, footer: true }"
-          size="small"
-          :bordered="false"
-        >
+        <NCard title="成交额" :segmented="{ content: true, footer: true }" size="small" :bordered="false">
           <template #header-extra>
             <n-tag type="error">月</n-tag>
           </template>

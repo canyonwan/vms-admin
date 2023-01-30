@@ -27,13 +27,7 @@
         <n-divider title-placement="center">系统主题</n-divider>
 
         <div class="drawer-setting-item align-items-top">
-          <span
-            class="theme-item"
-            v-for="(item, index) in appThemeList"
-            :key="index"
-            :style="{ 'background-color': item }"
-            @click="togTheme(item)"
-          >
+          <span class="theme-item" v-for="(item, index) in appThemeList" :key="index" :style="{ 'background-color': item }" @click="togTheme(item)">
             <n-icon size="12" v-if="item === designStore.appTheme">
               <CheckOutlined />
             </n-icon>
@@ -46,11 +40,7 @@
           <div class="drawer-setting-item-style align-items-top">
             <n-tooltip placement="top">
               <template #trigger>
-                <img
-                  src="~@/assets/images/nav-theme-dark.svg"
-                  @click="togNavMode('vertical')"
-                  alt="左侧菜单模式"
-                />
+                <img src="~@/assets/images/nav-theme-dark.svg" @click="togNavMode('vertical')" alt="左侧菜单模式" />
               </template>
               <span>左侧菜单模式</span>
             </n-tooltip>
@@ -60,11 +50,7 @@
           <div class="drawer-setting-item-style">
             <n-tooltip placement="top">
               <template #trigger>
-                <img
-                  src="~@/assets/images/nav-horizontal.svg"
-                  alt="顶部菜单模式"
-                  @click="togNavMode('horizontal')"
-                />
+                <img src="~@/assets/images/nav-horizontal.svg" alt="顶部菜单模式" @click="togNavMode('horizontal')" />
               </template>
               <span>顶部菜单模式</span>
             </n-tooltip>
@@ -74,11 +60,7 @@
           <div class="drawer-setting-item-style">
             <n-tooltip placement="top">
               <template #trigger>
-                <img
-                  src="~@/assets/images/nav-horizontal-mix.svg"
-                  @click="togNavMode('horizontal-mix')"
-                  alt="顶部菜单混合模式"
-                />
+                <img src="~@/assets/images/nav-horizontal-mix.svg" @click="togNavMode('horizontal-mix')" alt="顶部菜单混合模式" />
               </template>
               <span>顶部菜单混合模式</span>
             </n-tooltip>
@@ -92,11 +74,7 @@
           <div class="drawer-setting-item-style align-items-top">
             <n-tooltip placement="top">
               <template #trigger>
-                <img
-                  src="~@/assets/images/nav-theme-dark.svg"
-                  alt="暗色侧边栏"
-                  @click="togNavTheme('dark')"
-                />
+                <img src="~@/assets/images/nav-theme-dark.svg" alt="暗色侧边栏" @click="togNavTheme('dark')" />
               </template>
               <span>暗色侧边栏</span>
             </n-tooltip>
@@ -106,11 +84,7 @@
           <div class="drawer-setting-item-style">
             <n-tooltip placement="top">
               <template #trigger>
-                <img
-                  src="~@/assets/images/nav-theme-light.svg"
-                  alt="白色侧边栏"
-                  @click="togNavTheme('light')"
-                />
+                <img src="~@/assets/images/nav-theme-light.svg" alt="白色侧边栏" @click="togNavTheme('light')" />
               </template>
               <span>白色侧边栏</span>
             </n-tooltip>
@@ -120,11 +94,7 @@
           <div class="drawer-setting-item-style">
             <n-tooltip placement="top">
               <template #trigger>
-                <img
-                  src="~@/assets/images/header-theme-dark.svg"
-                  @click="togNavTheme('header-dark')"
-                  alt="暗色顶栏"
-                />
+                <img src="~@/assets/images/header-theme-dark.svg" @click="togNavTheme('header-dark')" alt="暗色顶栏" />
               </template>
               <span>暗色顶栏</span>
             </n-tooltip>
@@ -136,10 +106,7 @@
         <div class="drawer-setting-item">
           <div class="drawer-setting-item-title"> 分割菜单 </div>
           <div class="drawer-setting-item-action">
-            <n-switch
-              :disabled="settingStore.navMode !== 'horizontal-mix'"
-              v-model:value="settingStore.menuSetting.mixMenu"
-            />
+            <n-switch :disabled="settingStore.navMode !== 'horizontal-mix'" v-model:value="settingStore.menuSetting.mixMenu" />
           </div>
         </div>
 
@@ -259,8 +226,7 @@
         title: props.title,
         isDrawer: false,
         placement: 'right',
-        alertText:
-          '该功能主要实时预览各种布局效果，更多完整配置在 projectSetting.ts 中设置，建议在生产环境关闭该布局预览功能。',
+        alertText: '该功能主要实时预览各种布局效果，更多完整配置在 projectSetting.ts 中设置，建议在生产环境关闭该布局预览功能。',
         appThemeList: designStore.appThemeList
       })
 

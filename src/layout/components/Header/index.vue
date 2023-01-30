@@ -1,28 +1,17 @@
 <template>
   <div class="layout-header">
     <!--顶部菜单-->
-    <div
-      class="layout-header-left"
-      v-if="navMode === 'horizontal' || (navMode === 'horizontal-mix' && mixMenu)"
-    >
+    <div class="layout-header-left" v-if="navMode === 'horizontal' || (navMode === 'horizontal-mix' && mixMenu)">
       <div class="logo" v-if="navMode === 'horizontal'">
         <img :src="websiteConfig.logo" alt="" />
         <h2 v-show="!collapsed" class="title">{{ websiteConfig.title }}</h2>
       </div>
-      <AsideMenu
-        v-model:collapsed="collapsed"
-        v-model:location="getMenuLocation"
-        :inverted="getInverted"
-        mode="horizontal"
-      />
+      <AsideMenu v-model:collapsed="collapsed" v-model:location="getMenuLocation" :inverted="getInverted" mode="horizontal" />
     </div>
     <!--左侧菜单-->
     <div class="layout-header-left" v-else>
       <!-- 菜单收起 -->
-      <div
-        class="ml-1 layout-header-trigger layout-header-trigger-min"
-        @click="() => $emit('update:collapsed', !collapsed)"
-      >
+      <div class="ml-1 layout-header-trigger layout-header-trigger-min" @click="() => $emit('update:collapsed', !collapsed)">
         <n-icon size="18" v-if="collapsed">
           <MenuUnfoldOutlined />
         </n-icon>
@@ -31,11 +20,7 @@
         </n-icon>
       </div>
       <!-- 刷新 -->
-      <div
-        class="mr-1 layout-header-trigger layout-header-trigger-min"
-        v-if="headerSetting.isReload"
-        @click="reloadPage"
-      >
+      <div class="mr-1 layout-header-trigger layout-header-trigger-min" v-if="headerSetting.isReload" @click="reloadPage">
         <n-icon size="18">
           <ReloadOutlined />
         </n-icon>
@@ -44,24 +29,14 @@
       <n-breadcrumb v-if="crumbsSetting.show">
         <template v-for="routeItem in breadcrumbList" :key="routeItem.name">
           <n-breadcrumb-item v-if="routeItem.meta.title">
-            <n-dropdown
-              v-if="routeItem.children.length"
-              :options="routeItem.children"
-              @select="dropdownSelect"
-            >
+            <n-dropdown v-if="routeItem.children.length" :options="routeItem.children" @select="dropdownSelect">
               <span class="link-text">
-                <component
-                  v-if="crumbsSetting.showIcon && routeItem.meta.icon"
-                  :is="routeItem.meta.icon"
-                />
+                <component v-if="crumbsSetting.showIcon && routeItem.meta.icon" :is="routeItem.meta.icon" />
                 {{ routeItem.meta.title }}
               </span>
             </n-dropdown>
             <span class="link-text" v-else>
-              <component
-                v-if="crumbsSetting.showIcon && routeItem.meta.icon"
-                :is="routeItem.meta.icon"
-              />
+              <component v-if="crumbsSetting.showIcon && routeItem.meta.icon" :is="routeItem.meta.icon" />
               {{ routeItem.meta.title }}
             </span>
           </n-breadcrumb-item>
@@ -69,11 +44,7 @@
       </n-breadcrumb>
     </div>
     <div class="layout-header-right">
-      <div
-        class="layout-header-trigger layout-header-trigger-min"
-        v-for="item in iconList"
-        :key="item.icon.name"
-      >
+      <div class="layout-header-trigger layout-header-trigger-min" v-for="item in iconList" :key="item.icon.name">
         <n-tooltip placement="bottom">
           <template #trigger>
             <n-icon size="18">
@@ -153,8 +124,7 @@
       const useLockscreen = useLockscreenStore()
       const message = useMessage()
       const dialog = useDialog()
-      const { getNavMode, getNavTheme, getHeaderSetting, getMenuSetting, getCrumbsSetting } =
-        useProjectSetting()
+      const { getNavMode, getNavTheme, getHeaderSetting, getMenuSetting, getCrumbsSetting } = useProjectSetting()
 
       const { realName: username } = userStore?.info || {}
 
@@ -253,9 +223,7 @@
       }
 
       // 切换全屏图标
-      const toggleFullscreenIcon = () =>
-        (state.fullscreenIcon =
-          document.fullscreenElement !== null ? 'FullscreenExitOutlined' : 'FullscreenOutlined')
+      const toggleFullscreenIcon = () => (state.fullscreenIcon = document.fullscreenElement !== null ? 'FullscreenExitOutlined' : 'FullscreenOutlined')
 
       // 监听全屏切换事件
       document.addEventListener('fullscreenchange', toggleFullscreenIcon)

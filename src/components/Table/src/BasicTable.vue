@@ -49,12 +49,7 @@
       <n-tooltip trigger="hover">
         <template #trigger>
           <div class="table-toolbar-right-icon">
-            <n-dropdown
-              @select="densitySelect"
-              trigger="click"
-              :options="densityOptions"
-              v-model:value="tableSize"
-            >
+            <n-dropdown @select="densitySelect" trigger="click" :options="densityOptions" v-model:value="tableSize">
               <n-icon size="18">
                 <ColumnHeightOutlined />
               </n-icon>
@@ -69,14 +64,7 @@
     </div>
   </div>
   <div class="s-table">
-    <n-data-table
-      ref="tableElRef"
-      v-bind="getBindValues"
-      :striped="isStriped"
-      :pagination="pagination"
-      @update:page="updatePage"
-      @update:page-size="updatePageSize"
-    >
+    <n-data-table ref="tableElRef" v-bind="getBindValues" :striped="isStriped" :pagination="pagination" @update:page="updatePage" @update:page-size="updatePageSize">
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
         <slot :name="item" v-bind="data"></slot>
       </template>
@@ -85,17 +73,7 @@
 </template>
 
 <script lang="ts">
-  import {
-    ref,
-    defineComponent,
-    reactive,
-    unref,
-    toRaw,
-    computed,
-    toRefs,
-    onMounted,
-    nextTick
-  } from 'vue'
+  import { ref, defineComponent, reactive, unref, toRaw, computed, toRefs, onMounted, nextTick } from 'vue'
   import { ReloadOutlined, ColumnHeightOutlined, QuestionCircleOutlined } from '@vicons/antd'
   import { createTableContext } from './hooks/useTableContext'
 
@@ -142,15 +120,7 @@
     props: {
       ...basicProps
     },
-    emits: [
-      'fetch-success',
-      'fetch-error',
-      'update:checked-row-keys',
-      'edit-end',
-      'edit-cancel',
-      'edit-row-end',
-      'edit-change'
-    ],
+    emits: ['fetch-success', 'fetch-error', 'update:checked-row-keys', 'edit-end', 'edit-cancel', 'edit-row-end', 'edit-change'],
     setup(props, { emit }) {
       const deviceHeight = ref(150)
       const tableElRef = ref<ComponentRef>(null)
@@ -179,8 +149,7 @@
         emit
       )
 
-      const { getPageColumns, setColumns, getColumns, getCacheColumns, setCacheColumnsField } =
-        useColumns(getProps)
+      const { getPageColumns, setColumns, getColumns, getCacheColumns, setCacheColumnsField } = useColumns(getProps)
 
       const state = reactive({
         tableSize: unref(getProps as any).size || 'medium',
@@ -273,8 +242,7 @@
             paginationH += 28
           }
         }
-        let height =
-          bottomIncludeBody - (headerH + paginationH + marginH + (props.resizeHeightOffset || 0))
+        let height = bottomIncludeBody - (headerH + paginationH + marginH + (props.resizeHeightOffset || 0))
         const maxHeight = props.maxHeight
         height = maxHeight && maxHeight < height ? maxHeight : height
         deviceHeight.value = height

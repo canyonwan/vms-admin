@@ -3,12 +3,7 @@
     <div class="upload">
       <div class="upload-card">
         <!--图片列表-->
-        <div
-          class="upload-card-item"
-          :style="getCSSProperties"
-          v-for="(item, index) in imgList"
-          :key="`img_${index}`"
-        >
+        <div class="upload-card-item" :style="getCSSProperties" v-for="(item, index) in imgList" :key="`img_${index}`">
           <div class="upload-card-item-info">
             <div class="img-box">
               <img :src="item" />
@@ -25,17 +20,8 @@
         </div>
 
         <!--上传图片-->
-        <div
-          class="upload-card-item upload-card-item-select-picture"
-          :style="getCSSProperties"
-          v-if="imgList.length < maxNumber"
-        >
-          <n-upload
-            v-bind="$props"
-            :file-list-style="{ display: 'none' }"
-            @before-upload="beforeUpload"
-            @finish="finish"
-          >
+        <div class="upload-card-item upload-card-item-select-picture" :style="getCSSProperties" v-if="imgList.length < maxNumber">
+          <n-upload v-bind="$props" :file-list-style="{ display: 'none' }" @before-upload="beforeUpload" @finish="finish">
             <div class="flex flex-col justify-center">
               <n-icon size="18" class="m-auto">
                 <PlusOutlined />
@@ -56,13 +42,7 @@
   </div>
 
   <!--预览图片-->
-  <n-modal
-    v-model:show="showModal"
-    preset="card"
-    title="预览"
-    :bordered="false"
-    :style="{ width: '520px' }"
-  >
+  <n-modal v-model:show="showModal" preset="card" title="预览" :bordered="false" :style="{ width: '520px' }">
     <img :src="previewUrl" />
   </n-modal>
 </template>

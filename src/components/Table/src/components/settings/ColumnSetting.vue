@@ -11,28 +11,15 @@
           <template #header>
             <div class="table-toolbar-inner-popover-title">
               <n-space>
-                <n-checkbox v-model:checked="checkAll" @update:checked="onCheckAll"
-                  >列展示</n-checkbox
-                >
-                <n-checkbox v-model:checked="selection" @update:checked="onSelection"
-                  >勾选列</n-checkbox
-                >
-                <n-button text type="info" size="small" class="mt-1" @click="resetColumns"
-                  >重置</n-button
-                >
+                <n-checkbox v-model:checked="checkAll" @update:checked="onCheckAll">列展示</n-checkbox>
+                <n-checkbox v-model:checked="selection" @update:checked="onSelection">勾选列</n-checkbox>
+                <n-button text type="info" size="small" class="mt-1" @click="resetColumns">重置</n-button>
               </n-space>
             </div>
           </template>
           <div class="table-toolbar-inner">
             <n-checkbox-group v-model:value="checkList" @update:value="onChange">
-              <Draggable
-                v-model="columnsList"
-                animation="300"
-                item-key="key"
-                filter=".no-draggable"
-                :move="onMove"
-                @end="draggableEnd"
-              >
+              <Draggable v-model="columnsList" animation="300" item-key="key" filter=".no-draggable" :move="onMove" @end="draggableEnd">
                 <template #item="{ element }">
                   <div
                     class="table-toolbar-inner-checkbox"
@@ -41,10 +28,7 @@
                       'no-draggable': element.draggable === false
                     }"
                   >
-                    <span
-                      class="drag-icon"
-                      :class="{ 'drag-icon-hidden': element.draggable === false }"
-                    >
+                    <span class="drag-icon" :class="{ 'drag-icon-hidden': element.draggable === false }">
                       <n-icon size="18">
                         <DragOutlined />
                       </n-icon>
@@ -53,12 +37,7 @@
                     <div class="fixed-item">
                       <n-tooltip trigger="hover" placement="bottom">
                         <template #trigger>
-                          <n-icon
-                            size="18"
-                            :color="element.fixed === 'left' ? '#2080f0' : undefined"
-                            class="cursor-pointer"
-                            @click="fixedColumn(element, 'left')"
-                          >
+                          <n-icon size="18" :color="element.fixed === 'left' ? '#2080f0' : undefined" class="cursor-pointer" @click="fixedColumn(element, 'left')">
                             <VerticalRightOutlined />
                           </n-icon>
                         </template>
@@ -67,12 +46,7 @@
                       <n-divider vertical />
                       <n-tooltip trigger="hover" placement="bottom">
                         <template #trigger>
-                          <n-icon
-                            size="18"
-                            :color="element.fixed === 'right' ? '#2080f0' : undefined"
-                            class="cursor-pointer"
-                            @click="fixedColumn(element, 'right')"
-                          >
+                          <n-icon size="18" :color="element.fixed === 'right' ? '#2080f0' : undefined" class="cursor-pointer" @click="fixedColumn(element, 'right')">
                             <VerticalLeftOutlined />
                           </n-icon>
                         </template>
@@ -95,12 +69,7 @@
   import { ref, defineComponent, reactive, unref, toRaw, computed, toRefs, watchEffect } from 'vue'
   import { useTableContext } from '../../hooks/useTableContext'
   import { cloneDeep } from 'lodash-es'
-  import {
-    SettingOutlined,
-    DragOutlined,
-    VerticalRightOutlined,
-    VerticalLeftOutlined
-  } from '@vicons/antd'
+  import { SettingOutlined, DragOutlined, VerticalRightOutlined, VerticalLeftOutlined } from '@vicons/antd'
   import Draggable from 'vuedraggable'
   import { useDesignSetting } from '@/hooks/setting/useDesignSetting'
 

@@ -9,13 +9,7 @@
         <div class="view-phone-top-desc">{{ websiteConfig.loginDesc }}</div>
       </div>
       <div class="view-phone-form">
-        <n-form
-          ref="formRef"
-          label-placement="left"
-          size="large"
-          :model="formInline"
-          :rules="rules"
-        >
+        <n-form ref="formRef" label-placement="left" size="large" :model="formInline" :rules="rules">
           <n-form-item path="phone">
             <n-input v-model:value="formInline.phone" placeholder="请输入用户名">
               <template #prefix>
@@ -26,12 +20,7 @@
             </n-input>
           </n-form-item>
           <n-form-item path="password">
-            <n-input
-              v-model:value="formInline.password"
-              type="password"
-              showPasswordOn="click"
-              placeholder="请输入密码"
-            >
+            <n-input v-model:value="formInline.password" type="password" showPasswordOn="click" placeholder="请输入密码">
               <template #prefix>
                 <n-icon size="18" color="#808695">
                   <LockClosedOutline />
@@ -50,9 +39,7 @@
             </div>
           </n-form-item>
           <n-form-item>
-            <n-button type="primary" @click="handleSubmit" size="large" :loading="loading" block>
-              登录
-            </n-button>
+            <n-button type="primary" @click="handleSubmit" size="large" :loading="loading" block> 登录 </n-button>
           </n-form-item>
           <n-form-item class="default-color">
             <div class="flex view-phone-other">

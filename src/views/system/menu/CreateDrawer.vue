@@ -1,13 +1,7 @@
 <template>
   <n-drawer v-model:show="isDrawer" :width="width" :placement="placement">
     <n-drawer-content :title="title" closable>
-      <n-form
-        :model="formParams"
-        :rules="rules"
-        ref="formRef"
-        label-placement="left"
-        :label-width="100"
-      >
+      <n-form :model="formParams" :rules="rules" ref="formRef" label-placement="left" :label-width="100">
         <n-form-item label="类型" path="type">
           <span>{{ formParams.type === 1 ? '侧边栏菜单' : '' }}</span>
         </n-form-item>
@@ -93,8 +87,7 @@
         subLoading: false,
         formParams: defaultValueRef(),
         placement: 'right',
-        alertText:
-          '该功能主要实时预览各种布局效果，更多完整配置在 projectSetting.ts 中设置，建议在生产环境关闭该布局预览功能。'
+        alertText: '该功能主要实时预览各种布局效果，更多完整配置在 projectSetting.ts 中设置，建议在生产环境关闭该布局预览功能。'
       })
 
       function openDrawer() {

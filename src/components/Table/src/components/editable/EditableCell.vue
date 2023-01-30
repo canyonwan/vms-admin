@@ -316,41 +316,39 @@
       function initCbs(cbs: 'submitCbs' | 'validCbs' | 'cancelCbs', handle: Fn) {
         if (props.record) {
           /* eslint-disable  */
-          isArray(props.record[cbs])
-            ? props.record[cbs]?.push(handle)
-            : (props.record[cbs] = [handle]);
+          isArray(props.record[cbs]) ? props.record[cbs]?.push(handle) : (props.record[cbs] = [handle])
         }
       }
 
       if (props.record) {
-        initCbs('submitCbs', handleSubmit);
-        initCbs('validCbs', handleSubmiRule);
-        initCbs('cancelCbs', handleCancel);
+        initCbs('submitCbs', handleSubmit)
+        initCbs('validCbs', handleSubmiRule)
+        initCbs('cancelCbs', handleCancel)
 
         if (props.column.key) {
-          if (!props.record.editValueRefs) props.record.editValueRefs = {};
-          props.record.editValueRefs[props.column.key] = currentValueRef;
+          if (!props.record.editValueRefs) props.record.editValueRefs = {}
+          props.record.editValueRefs[props.column.key] = currentValueRef
         }
         /* eslint-disable  */
         props.record.onCancelEdit = () => {
-          isArray(props.record?.cancelCbs) && props.record?.cancelCbs.forEach((fn) => fn());
-        };
+          isArray(props.record?.cancelCbs) && props.record?.cancelCbs.forEach((fn) => fn())
+        }
         /* eslint-disable */
         props.record.onSubmitEdit = async () => {
           if (isArray(props.record?.submitCbs)) {
-            const validFns = (props.record?.validCbs || []).map((fn) => fn());
+            const validFns = (props.record?.validCbs || []).map((fn) => fn())
 
-            const res = await Promise.all(validFns);
+            const res = await Promise.all(validFns)
 
-            const pass = res.every((item) => !!item);
+            const pass = res.every((item) => !!item)
 
-            if (!pass) return;
-            const submitFns = props.record?.submitCbs || [];
-            submitFns.forEach((fn) => fn(false, false));
-            table.emit?.('edit-row-end');
-            return true;
+            if (!pass) return
+            const submitFns = props.record?.submitCbs || []
+            submitFns.forEach((fn) => fn(false, false))
+            table.emit?.('edit-row-end')
+            return true
           }
-        };
+        }
       }
 
       return {
@@ -371,11 +369,11 @@
         getWrapperClass,
         getRowEditable,
         getValues,
-        handleEnter,
+        handleEnter
         // getSize,
-      };
-    },
-  });
+      }
+    }
+  })
 </script>
 
 <style lang="less">

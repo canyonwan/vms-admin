@@ -71,9 +71,7 @@
 
       const getSelectedKeys = computed(() => {
         let location = props.location
-        return location === 'left' || (location === 'header' && unref(navMode) === 'horizontal')
-          ? unref(selectedKeys)
-          : unref(headerMenuSelectKey)
+        return location === 'left' || (location === 'header' && unref(navMode) === 'horizontal') ? unref(selectedKeys) : unref(headerMenuSelectKey)
       })
 
       // 监听分割菜单

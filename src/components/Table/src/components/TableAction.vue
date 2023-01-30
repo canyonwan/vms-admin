@@ -1,7 +1,7 @@
 <template>
   <div class="tableAction">
     <div class="flex items-center justify-center">
-      <template v-for="(action, index) in getActions" :key="`${index}-${action.label}`">
+      <template v-for="action in getActions" :key="`${index}-${action.label}`">
         <n-button v-bind="action" class="mx-2">
           {{ action.label }}
           <template #icon v-if="action.hasOwnProperty('icon')">
@@ -9,12 +9,7 @@
           </template>
         </n-button>
       </template>
-      <n-dropdown
-        v-if="dropDownActions && getDropdownList.length"
-        trigger="hover"
-        :options="getDropdownList"
-        @select="select"
-      >
+      <n-dropdown v-if="dropDownActions && getDropdownList.length" trigger="hover" :options="getDropdownList" @select="select">
         <slot name="more"></slot>
         <n-button v-bind="getMoreProps" class="mx-2" v-if="!$slots.more" icon-placement="right">
           <div class="flex items-center">
@@ -23,9 +18,6 @@
               <DownOutlined />
             </n-icon>
           </div>
-          <!--          <template #icon>-->
-          <!--            -->
-          <!--          </template>-->
         </n-button>
       </n-dropdown>
     </div>
@@ -64,10 +56,8 @@
     setup(props) {
       const { hasPermission } = usePermission()
 
-      const actionType =
-        props.style === 'button' ? 'default' : props.style === 'text' ? 'primary' : 'default'
-      const actionText =
-        props.style === 'button' ? undefined : props.style === 'text' ? true : undefined
+      const actionType = props.style === 'button' ? 'default' : props.style === 'text' ? 'primary' : 'default'
+      const actionText = props.style === 'button' ? undefined : props.style === 'text' ? true : undefined
 
       const getMoreProps = computed(() => {
         return {

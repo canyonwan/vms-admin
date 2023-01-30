@@ -9,9 +9,7 @@
     <template #action v-if="getBindValue.showActionButtonGroup && !getBindValue.disabled">
       <n-space>
         <n-button @click="closeModal">取消</n-button>
-        <n-button type="primary" :loading="subLoading" @click="handleSubmit">{{
-          subBtuText
-        }}</n-button>
+        <n-button type="primary" :loading="subLoading" @click="handleSubmit">{{ subBtuText }}</n-button>
       </n-space>
     </template>
     <template v-else #action>

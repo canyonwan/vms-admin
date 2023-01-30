@@ -1,11 +1,5 @@
 <template>
-  <div
-    :class="{ onLockLogin: showLogin }"
-    class="lockscreen"
-    @keyup="onLockLogin(true)"
-    @mousedown.stop
-    @contextmenu.prevent
-  >
+  <div :class="{ onLockLogin: showLogin }" class="lockscreen" @keyup="onLockLogin(true)" @mousedown.stop @contextmenu.prevent>
     <template v-if="!showLogin">
       <div class="lock-box">
         <div class="lock">
@@ -17,12 +11,7 @@
         </div>
       </div>
       <!--充电-->
-      <recharge
-        :battery="battery"
-        :battery-status="batteryStatus"
-        :calc-discharging-time="calcDischargingTime"
-        :calc-charging-time="calcChargingTime"
-      />
+      <recharge :battery="battery" :battery-status="batteryStatus" :calc-discharging-time="calcDischargingTime" :calc-charging-time="calcChargingTime" />
 
       <div class="local-time">
         <div class="time">{{ hour }}:{{ minute }}</div>
@@ -45,13 +34,7 @@
           </n-icon>
         </n-avatar>
         <div class="username">{{ loginParams.username }}</div>
-        <n-input
-          type="password"
-          autofocus
-          v-model:value="loginParams.password"
-          @keyup.enter="onLogin"
-          placeholder="请输入登录密码"
-        >
+        <n-input type="password" autofocus v-model:value="loginParams.password" @keyup.enter="onLogin" placeholder="请输入登录密码">
           <template #suffix>
             <n-icon @click="onLogin" style="cursor: pointer">
               <LoadingOutlined v-if="loginLoading" />
@@ -78,14 +61,7 @@
   import { defineComponent, reactive, toRefs } from 'vue'
   import { ResultEnum } from '@/enums/httpEnum'
   import recharge from './Recharge.vue'
-  import {
-    LockOutlined,
-    LoadingOutlined,
-    UserOutlined,
-    ApiOutlined,
-    ArrowRightOutlined,
-    WifiOutlined
-  } from '@vicons/antd'
+  import { LockOutlined, LoadingOutlined, UserOutlined, ApiOutlined, ArrowRightOutlined, WifiOutlined } from '@vicons/antd'
 
   import { useRouter, useRoute } from 'vue-router'
   import { useOnline } from '@/hooks/useOnline'

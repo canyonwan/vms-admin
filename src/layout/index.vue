@@ -1,9 +1,7 @@
 <template>
   <n-layout class="layout" :position="fixedMenu" has-sider>
     <n-layout-sider
-      v-if="
-        !isMobile && isMixMenuNoneSub && (navMode === 'vertical' || navMode === 'horizontal-mix')
-      "
+      v-if="!isMobile && isMixMenuNoneSub && (navMode === 'vertical' || navMode === 'horizontal-mix')"
       show-trigger="bar"
       @collapse="collapsed = true"
       :position="fixedMenu"
@@ -20,12 +18,7 @@
       <AsideMenu v-model:collapsed="collapsed" v-model:location="getMenuLocation" />
     </n-layout-sider>
 
-    <n-drawer
-      v-model:show="showSideDrawder"
-      :width="menuWidth"
-      :placement="'left'"
-      class="layout-side-drawer"
-    >
+    <n-drawer v-model:show="showSideDrawder" :width="menuWidth" :placement="'left'" class="layout-side-drawer">
       <Logo :collapsed="collapsed" />
       <AsideMenu @clickMenuItem="collapsed = false" />
     </n-drawer>
@@ -35,10 +28,7 @@
         <PageHeader v-model:collapsed="collapsed" :inverted="inverted" />
       </n-layout-header>
 
-      <n-layout-content
-        class="layout-content"
-        :class="{ 'layout-default-background': getDarkTheme === false }"
-      >
+      <n-layout-content class="layout-content" :class="{ 'layout-default-background': getDarkTheme === false }">
         <div
           class="layout-content-main"
           :class="{

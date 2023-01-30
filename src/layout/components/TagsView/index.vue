@@ -11,20 +11,12 @@
   >
     <div class="tabs-view-main">
       <div ref="navWrap" class="tabs-card" :class="{ 'tabs-card-scrollable': scrollable }">
-        <span
-          class="tabs-card-prev"
-          :class="{ 'tabs-card-prev-hide': !scrollable }"
-          @click="scrollPrev"
-        >
+        <span class="tabs-card-prev" :class="{ 'tabs-card-prev-hide': !scrollable }" @click="scrollPrev">
           <n-icon size="16" color="#515a6e">
             <LeftOutlined />
           </n-icon>
         </span>
-        <span
-          class="tabs-card-next"
-          :class="{ 'tabs-card-next-hide': !scrollable }"
-          @click="scrollNext"
-        >
+        <span class="tabs-card-next" :class="{ 'tabs-card-next-hide': !scrollable }" @click="scrollNext">
           <n-icon size="16" color="#515a6e">
             <RightOutlined />
           </n-icon>
@@ -49,12 +41,7 @@
         </div>
       </div>
       <div class="tabs-close">
-        <n-dropdown
-          trigger="hover"
-          @select="closeHandleSelect"
-          placement="bottom-end"
-          :options="TabsMenuOptions"
-        >
+        <n-dropdown trigger="hover" @select="closeHandleSelect" placement="bottom-end" :options="TabsMenuOptions">
           <div class="tabs-close-btn">
             <n-icon size="16" color="#515a6e">
               <DownOutlined />
@@ -62,32 +49,13 @@
           </div>
         </n-dropdown>
       </div>
-      <n-dropdown
-        :show="showDropdown"
-        :x="dropdownX"
-        :y="dropdownY"
-        @clickoutside="onClickOutside"
-        placement="bottom-start"
-        @select="closeHandleSelect"
-        :options="TabsMenuOptions"
-      />
+      <n-dropdown :show="showDropdown" :x="dropdownX" :y="dropdownY" @clickoutside="onClickOutside" placement="bottom-start" @select="closeHandleSelect" :options="TabsMenuOptions" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import {
-    defineComponent,
-    reactive,
-    computed,
-    ref,
-    toRefs,
-    unref,
-    provide,
-    watch,
-    onMounted,
-    nextTick
-  } from 'vue'
+  import { defineComponent, reactive, computed, ref, toRefs, unref, provide, watch, onMounted, nextTick } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
   import { storage } from '@/utils/Storage'
   import { TABS_ROUTES } from '@/store/mutation-types'
@@ -98,15 +66,7 @@
   import { useMessage } from 'naive-ui'
   import Draggable from 'vuedraggable'
   import { PageEnum } from '@/enums/pageEnum'
-  import {
-    DownOutlined,
-    ReloadOutlined,
-    CloseOutlined,
-    ColumnWidthOutlined,
-    MinusOutlined,
-    LeftOutlined,
-    RightOutlined
-  } from '@vicons/antd'
+  import { DownOutlined, ReloadOutlined, CloseOutlined, ColumnWidthOutlined, MinusOutlined, LeftOutlined, RightOutlined } from '@vicons/antd'
   import { renderIcon } from '@/utils'
   import elementResizeDetectorMaker from 'element-resize-detector'
   import { useDesignSetting } from '@/hooks/setting/useDesignSetting'
@@ -130,8 +90,7 @@
     },
     setup(props) {
       const { getDarkTheme, getAppTheme } = useDesignSetting()
-      const { getNavMode, getHeaderSetting, getMenuSetting, getMultiTabsSetting, getIsMobile } =
-        useProjectSetting()
+      const { getNavMode, getHeaderSetting, getMenuSetting, getMultiTabsSetting, getIsMobile } = useProjectSetting()
       const settingStore = useProjectSettingStore()
 
       const message = useMessage()
@@ -184,12 +143,7 @@
         const navMode = unref(getNavMode)
         const { minMenuWidth, menuWidth }: any = unref(getMenuSetting)
         const { fixed }: any = unref(getMultiTabsSetting)
-        let lenNum =
-          navMode === 'horizontal' || !isMixMenuNoneSub.value
-            ? '0px'
-            : collapsed
-            ? `${minMenuWidth}px`
-            : `${menuWidth}px`
+        let lenNum = navMode === 'horizontal' || !isMixMenuNoneSub.value ? '0px' : collapsed ? `${minMenuWidth}px` : `${menuWidth}px`
 
         if (getIsMobile.value) {
           return {
@@ -257,16 +211,8 @@
 
       //监听滚动条
       function onScroll(e) {
-        let scrollTop =
-          e.target.scrollTop ||
-          document.documentElement.scrollTop ||
-          window.pageYOffset ||
-          document.body.scrollTop // 滚动条偏移量
-        state.isMultiHeaderFixed = !!(
-          !getHeaderSetting.value.fixed &&
-          getMultiTabsSetting.value.fixed &&
-          scrollTop >= 64
-        )
+        let scrollTop = e.target.scrollTop || document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop // 滚动条偏移量
+        state.isMultiHeaderFixed = !!(!getHeaderSetting.value.fixed && getMultiTabsSetting.value.fixed && scrollTop >= 64)
       }
 
       window.addEventListener('scroll', onScroll, true)
@@ -274,23 +220,16 @@
       // 移除缓存组件名称
       const delKeepAliveCompName = () => {
         if (route.meta.keepAlive) {
-          const name = router.currentRoute.value.matched.find((item) => item.name == route.name)
-            ?.components?.default.name
+          const name = router.currentRoute.value.matched.find((item) => item.name == route.name)?.components?.default.name
           if (name) {
-            asyncRouteStore.keepAliveComponents = asyncRouteStore.keepAliveComponents.filter(
-              (item) => item != name
-            )
+            asyncRouteStore.keepAliveComponents = asyncRouteStore.keepAliveComponents.filter((item) => item != name)
           }
         }
       }
 
       // 标签页列表
       const tabsList: any = computed(() => tabsViewStore.tabsList)
-      const whiteList: string[] = [
-        PageEnum.BASE_LOGIN_NAME,
-        PageEnum.REDIRECT_NAME,
-        PageEnum.ERROR_PAGE_NAME
-      ]
+      const whiteList: string[] = [PageEnum.BASE_LOGIN_NAME, PageEnum.REDIRECT_NAME, PageEnum.ERROR_PAGE_NAME]
 
       watch(
         () => route.fullPath,
@@ -396,11 +335,7 @@
        */
       function scrollTo(value: number, amplitude: number) {
         const currentScroll = navScroll.value.scrollLeft
-        const scrollWidth =
-          (amplitude > 0 && currentScroll + amplitude >= value) ||
-          (amplitude < 0 && currentScroll + amplitude <= value)
-            ? value
-            : currentScroll + amplitude
+        const scrollWidth = (amplitude > 0 && currentScroll + amplitude >= value) || (amplitude < 0 && currentScroll + amplitude <= value) ? value : currentScroll + amplitude
         navScroll.value && navScroll.value.scrollTo(scrollWidth, 0)
         if (scrollWidth === value) return
         return window.requestAnimationFrame(() => scrollTo(value, amplitude))
@@ -421,10 +356,7 @@
         const currentScroll = navScroll.value.scrollLeft
 
         if (navWidth - currentScroll <= containerWidth) return
-        const scrollLeft =
-          navWidth - currentScroll > containerWidth * 2
-            ? currentScroll + containerWidth
-            : navWidth - containerWidth
+        const scrollLeft = navWidth - currentScroll > containerWidth * 2 ? currentScroll + containerWidth : navWidth - containerWidth
         scrollTo(scrollLeft, (scrollLeft - currentScroll) / 20)
       }
 

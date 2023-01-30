@@ -1,19 +1,10 @@
 <template>
   <div>
     <div class="n-layout-page-header">
-      <n-card :bordered="false" title="角色权限管理">
-        页面数据为 Mock 示例数据，非真实数据。
-      </n-card>
+      <n-card :bordered="false" title="角色权限管理"> 页面数据为 Mock 示例数据，非真实数据。 </n-card>
     </div>
     <n-card :bordered="false" class="mt-4 proCard">
-      <BasicTable
-        :columns="columns"
-        :request="loadDataTable"
-        :row-key="(row) => row.id"
-        ref="actionRef"
-        :actionColumn="actionColumn"
-        @update:checked-row-keys="onCheckedRow"
-      >
+      <BasicTable :columns="columns" :request="loadDataTable" :row-key="(row) => row.id" ref="actionRef" :actionColumn="actionColumn" @update:checked-row-keys="onCheckedRow">
         <template #tableTitle>
           <n-button type="primary">
             <template #icon>
@@ -48,13 +39,9 @@
       </div>
       <template #action>
         <n-space>
-          <n-button type="info" ghost icon-placement="left" @click="packHandle">
-            全部{{ expandedKeys.length ? '收起' : '展开' }}
-          </n-button>
+          <n-button type="info" ghost icon-placement="left" @click="packHandle"> 全部{{ expandedKeys.length ? '收起' : '展开' }} </n-button>
 
-          <n-button type="info" ghost icon-placement="left" @click="checkedAllHandle">
-            全部{{ checkedAll ? '取消' : '选择' }}
-          </n-button>
+          <n-button type="info" ghost icon-placement="left" @click="checkedAllHandle"> 全部{{ checkedAll ? '取消' : '选择' }} </n-button>
           <n-button type="primary" :loading="formBtnLoading" @click="confirmForm">提交</n-button>
         </n-space>
       </template>

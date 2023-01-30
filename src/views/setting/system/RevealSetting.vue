@@ -5,43 +5,23 @@
         <n-form-item label="商品图片(大)">
           <n-space align="center">
             <span>宽度：</span>
-            <n-input
-              v-model:value="formValue.bigWidth"
-              style="width: 80px"
-              placeholder="宽度像素"
-            />
+            <n-input v-model:value="formValue.bigWidth" style="width: 80px" placeholder="宽度像素" />
             <span>高度：</span>
-            <n-input
-              v-model:value="formValue.bigHeight"
-              style="width: 80px"
-              placeholder="高度像素"
-            />
+            <n-input v-model:value="formValue.bigHeight" style="width: 80px" placeholder="高度像素" />
           </n-space>
         </n-form-item>
 
         <n-form-item label="商品图片(小)">
           <n-space align="center">
             <span>宽度：</span>
-            <n-input
-              v-model:value="formValue.smallWidth"
-              style="width: 80px"
-              placeholder="宽度像素"
-            />
+            <n-input v-model:value="formValue.smallWidth" style="width: 80px" placeholder="宽度像素" />
             <span>高度：</span>
-            <n-input
-              v-model:value="formValue.smallHeight"
-              style="width: 80px"
-              placeholder="高度像素"
-            />
+            <n-input v-model:value="formValue.smallHeight" style="width: 80px" placeholder="高度像素" />
           </n-space>
         </n-form-item>
 
         <n-form-item label="水印透明度" path="watermarkClarity">
-          <n-input-number
-            v-model:value="formValue.watermarkClarity"
-            :show-button="false"
-            placeholder="请输入水印透明度"
-          />
+          <n-input-number v-model:value="formValue.watermarkClarity" :show-button="false" placeholder="请输入水印透明度" />
         </n-form-item>
 
         <n-form-item label="水印图片" path="watermarkClarity">
@@ -51,27 +31,15 @@
         </n-form-item>
 
         <n-form-item label="水印位置" path="watermarkPlace">
-          <n-select
-            placeholder="请选择价格精确方式"
-            :options="watermarkPlaceList"
-            v-model:value="formValue.watermarkPlace"
-          />
+          <n-select placeholder="请选择价格精确方式" :options="watermarkPlaceList" v-model:value="formValue.watermarkPlace" />
         </n-form-item>
 
         <n-form-item label="价格精确位数" path="pricePreciseNum">
-          <n-select
-            placeholder="请选择价格精确位数"
-            :options="pricePreciseNumList"
-            v-model:value="formValue.pricePreciseNum"
-          />
+          <n-select placeholder="请选择价格精确位数" :options="pricePreciseNumList" v-model:value="formValue.pricePreciseNum" />
         </n-form-item>
 
         <n-form-item label="价格精确方式" path="pricePrecise">
-          <n-select
-            placeholder="请选择价格精确方式"
-            :options="pricePreciseList"
-            v-model:value="formValue.pricePrecise"
-          />
+          <n-select placeholder="请选择价格精确方式" :options="pricePreciseList" v-model:value="formValue.pricePrecise" />
         </n-form-item>
 
         <n-form-item label="前台显示市场价" path="isMarketPrice">

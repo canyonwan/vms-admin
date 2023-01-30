@@ -28,19 +28,11 @@
         </n-form-item>
 
         <n-form-item label="网站开启访问" path="systemOpen">
-          <n-switch
-            size="large"
-            v-model:value="formValue.systemOpen"
-            @update:value="systemOpenChange"
-          />
+          <n-switch size="large" v-model:value="formValue.systemOpen" @update:value="systemOpenChange" />
         </n-form-item>
 
         <n-form-item label="网站关闭提示" path="closeText">
-          <n-input
-            v-model:value="formValue.closeText"
-            type="textarea"
-            placeholder="请输入网站关闭提示"
-          />
+          <n-input v-model:value="formValue.closeText" type="textarea" placeholder="请输入网站关闭提示" />
         </n-form-item>
 
         <div>
@@ -83,8 +75,7 @@
           icpCode: '',
           address: '',
           loginCode: 0,
-          closeText:
-            '网站维护中，暂时无法访问！本网站正在进行系统维护和技术升级，网站暂时无法访问，敬请谅解！',
+          closeText: '网站维护中，暂时无法访问！本网站正在进行系统维护和技术升级，网站暂时无法访问，敬请谅解！',
           systemOpen: true
         }
       })

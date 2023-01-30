@@ -4,14 +4,7 @@
       <n-card :bordered="false" title="角色权限管理"> 搜索 </n-card>
     </div>
     <n-card :bordered="false" class="mt-4 proCard">
-      <BasicTable
-        :columns="columns"
-        :request="loadDataTable"
-        :row-key="(row) => row.id"
-        ref="actionRef"
-        :actionColumn="actionColumn"
-        scroll-x="1070"
-      >
+      <BasicTable :columns="columns" :request="loadDataTable" :row-key="(row) => row.id" ref="actionRef" :actionColumn="actionColumn" scroll-x="1070">
         <template #tableTitle>
           <n-button type="primary" @click="addUser">
             <template #icon>
@@ -67,7 +60,12 @@
           {
             label: '删除',
             type: 'error',
-            onClick: handleMenuAuth.bind(null, record)
+            popConfirm: {
+              title: '确定删除吗？',
+              okText: '确定',
+              cancelText: '取消',
+              confirm: handleMenuAuth.bind(null, record)
+            }
           }
         ]
       })
