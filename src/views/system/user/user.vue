@@ -33,6 +33,8 @@
   import { getUserList } from '@/api/system/user'
   import { useModal } from '@/components/Modal'
   import SaveUser from './components/SaveUser.vue'
+  import type { IUserItem } from '@/api/system/types'
+  import { useDialog } from 'naive-ui'
 
   const searchParams = reactive({
     page: 1
@@ -50,22 +52,17 @@
           {
             label: !record.status ? '禁用' : '启用',
             type: record.status ? 'success' : 'error',
-            onClick: handleMenuAuth.bind(null, record)
+            onClick: onChangeStatus.bind(null, record)
           },
           {
             label: '编辑',
             type: 'primary',
-            onClick: handleMenuAuth.bind(null, record)
+            onClick: onEdit.bind(null, record)
           },
           {
             label: '删除',
             type: 'error',
-            popConfirm: {
-              title: '确定删除吗？',
-              okText: '确定',
-              cancelText: '取消',
-              confirm: handleMenuAuth.bind(null, record)
-            }
+            onClick: onDelete.bind(null, record)
           }
         ]
       })
@@ -81,8 +78,29 @@
     return await getUserList(params)
   }
 
-  function handleMenuAuth(rows: any) {
+  function onChangeStatus(rows: IUserItem) {
     console.log('%c [ rows ]-87', 'font-size:13px; background:pink; color:#bf2c9f;', rows)
+  }
+
+  function onEdit(rows: IUserItem) {
+    openModal()
+    setProps({ title: '编辑用户' })
+    console.log('%c [ rows ]-90', 'font-size:13px; background:pink; color:#bf2c9f;', rows)
+  }
+
+  const dialog = useDialog()
+  function onDelete(row: IUserItem) {
+    dialog.error({
+      title: '提示',
+      content: `你确定要删除用户[${row.realName}]吗？`,
+      positiveText: '确定',
+      negativeText: '取消',
+      onPositiveClick: async () => {
+        console.log('%c [ rows ]-93', 'font-size:13px; background:pink; color:#bf2c9f;', row)
+        // await deleteCauseType(id)
+        // getCauseTypes()
+      }
+    })
   }
 
   function addUser() {
