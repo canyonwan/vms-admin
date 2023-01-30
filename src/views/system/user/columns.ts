@@ -1,26 +1,26 @@
-import { h } from 'vue';
-import { NTag } from 'naive-ui';
+import { h } from 'vue'
+import { NTag } from 'naive-ui'
 
 export const columns = [
   {
     title: 'id',
     key: 'id',
-    width: 100,
+    width: 100
   },
   {
     title: '手机号',
     key: 'phone',
-    width: 140,
+    width: 140
   },
   {
     title: '真实姓名',
     key: 'realName',
-    width: 140,
+    width: 140
   },
   {
     title: '角色',
     key: 'roleIds',
-    width: 120,
+    width: 120
   },
   {
     title: '性别',
@@ -30,13 +30,13 @@ export const columns = [
       return h(
         NTag,
         {
-          type: row.gender ? 'success' : 'error',
+          type: row.gender ? 'success' : 'error'
         },
         {
-          default: () => (row.gender ? '男' : '女'),
+          default: () => (row.gender ? '男' : '女')
         }
-      );
-    },
+      )
+    }
   },
   {
     title: '状态',
@@ -46,13 +46,13 @@ export const columns = [
       return h(
         NTag,
         {
-          type: row.status ? 'success' : 'error',
+          type: row.status ? 'success' : 'error'
         },
         {
-          default: () => (row.status ? '正常' : '禁用'),
+          default: () => (row.status ? '正常' : '禁用')
         }
-      );
-    },
+      )
+    }
   },
   {
     title: '是否是超管',
@@ -62,17 +62,17 @@ export const columns = [
       return h(
         NTag,
         {
-          type: row.isSuperAdmin ? 'success' : 'error',
+          type: row.isSuperAdmin ? 'success' : 'error'
         },
         {
-          default: () => (row.isSuperAdmin ? '是' : '否'),
+          default: () => (row.isSuperAdmin ? '是' : '否')
         }
-      );
-    },
+      )
+    }
   },
   {
     title: '创建时间',
     key: 'createdAt',
-    width: 140,
-  },
-];
+    width: 140
+  }
+]

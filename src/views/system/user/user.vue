@@ -34,16 +34,16 @@
 </template>
 
 <script setup lang="ts">
-  import { TableAction } from '@/components/Table';
-  import { PlusOutlined } from '@vicons/antd';
-  import { columns } from './columns';
-  import { getUserList } from '@/api/system/user';
-  import { useModal } from '@/components/Modal';
-  import SaveUser from './components/SaveUser.vue';
+  import { TableAction } from '@/components/Table'
+  import { PlusOutlined } from '@vicons/antd'
+  import { columns } from './columns'
+  import { getUserList } from '@/api/system/user'
+  import { useModal } from '@/components/Modal'
+  import SaveUser from './components/SaveUser.vue'
 
   const searchParams = reactive({
-    page: 1,
-  });
+    page: 1
+  })
 
   const actionColumn = reactive({
     width: 200,
@@ -57,38 +57,38 @@
           {
             label: !record.status ? '禁用' : '启用',
             type: record.status ? 'success' : 'error',
-            onClick: handleMenuAuth.bind(null, record),
+            onClick: handleMenuAuth.bind(null, record)
           },
           {
             label: '编辑',
             type: 'primary',
-            onClick: handleMenuAuth.bind(null, record),
+            onClick: handleMenuAuth.bind(null, record)
           },
           {
             label: '删除',
             type: 'error',
-            onClick: handleMenuAuth.bind(null, record),
-          },
-        ],
-      });
-    },
-  });
-  const [modalRegister, { openModal, setProps }] = useModal({});
+            onClick: handleMenuAuth.bind(null, record)
+          }
+        ]
+      })
+    }
+  })
+  const [modalRegister, { openModal, setProps }] = useModal({})
 
   const loadDataTable = async (res: any) => {
     let params = {
       ...unref(searchParams),
-      ...res,
-    };
-    return await getUserList(params);
-  };
+      ...res
+    }
+    return await getUserList(params)
+  }
 
   function handleMenuAuth(rows: any) {
-    console.log('%c [ rows ]-73', 'font-size:13px; background:pink; color:#bf2c9f;', rows);
+    console.log('%c [ rows ]-87', 'font-size:13px; background:pink; color:#bf2c9f;', rows)
   }
 
   function addUser() {
-    openModal();
-    setProps({ title: '添加用户' });
+    openModal()
+    setProps({ title: '添加用户' })
   }
 </script>
