@@ -1,29 +1,29 @@
-import { FormSchema } from '@/components/Form/src/types/form';
+import { FormSchema } from '@/components/Form/src/types/form'
 
 export const schemasForm: FormSchema[] = [
   {
     field: 'phone',
     component: 'NInput',
     label: '手机',
-    componentProps: {},
+    componentProps: {}
   },
   {
     field: 'realName',
     component: 'NInput',
     label: '真实姓名',
-    componentProps: {},
+    componentProps: {}
   },
   {
     field: 'password',
     component: 'NInput',
     label: '密码',
-    componentProps: {},
+    componentProps: {}
   },
   {
     field: 'permissions',
     component: 'NSelect',
     label: '权限',
-    componentProps: {},
+    componentProps: {}
   },
   {
     field: 'platform',
@@ -32,9 +32,9 @@ export const schemasForm: FormSchema[] = [
     componentProps: {
       options: [
         { label: '小程序端', value: 1 },
-        { label: '管理端', value: 2 },
-      ],
-    },
+        { label: '管理端', value: 2 }
+      ]
+    }
   },
   {
     field: 'gender',
@@ -44,16 +44,16 @@ export const schemasForm: FormSchema[] = [
       options: [
         { label: '女', value: 0 },
         { label: '男', value: 1 },
-        { label: '未知', value: 2 },
-      ],
-    },
+        { label: '未知', value: 2 }
+      ]
+    }
   },
   {
     field: 'avatar',
     component: 'NUpload',
     label: '头像',
     componentProps: {
-      accept: '.png,.jpg,.jpeg',
-    },
-  },
-];
+      accept: '.png,.jpg,.jpeg'
+    }
+  }
+]
