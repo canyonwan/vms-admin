@@ -14,9 +14,7 @@ export function useForm(props?: Props): UseFormReturnType {
   async function getForm() {
     const form = unref(formRef)
     if (!form) {
-      console.error(
-        'The form instance has not been obtained, please make sure that the form has been rendered when performing the form operation!'
-      )
+      console.error('The form instance has not been obtained, please make sure that the form has been rendered when performing the form operation!')
     }
     await nextTick()
     return form as FormActionType

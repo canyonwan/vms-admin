@@ -16,16 +16,7 @@ interface UseFormActionContext {
   handleFormValues: Function
 }
 
-export function useFormEvents({
-  emit,
-  getProps,
-  formModel,
-  getSchema,
-  formElRef,
-  defaultFormModel,
-  loadingSub,
-  handleFormValues
-}: UseFormActionContext) {
+export function useFormEvents({ emit, getProps, formModel, getSchema, formElRef, defaultFormModel, loadingSub, handleFormValues }: UseFormActionContext) {
   // 验证
   async function validate() {
     return unref(formElRef)?.validate()

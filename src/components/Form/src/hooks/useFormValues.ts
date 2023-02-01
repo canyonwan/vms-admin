@@ -19,12 +19,7 @@ export function useFormValues({ defaultFormModel, getSchema, formModel }: UseFor
     for (const item of Object.entries(values)) {
       let [, value] = item
       const [key] = item
-      if (
-        !key ||
-        (isArray(value) && value.length === 0) ||
-        isFunction(value) ||
-        isNullOrUnDef(value)
-      ) {
+      if (!key || (isArray(value) && value.length === 0) || isFunction(value) || isNullOrUnDef(value)) {
         continue
       }
       // 删除空格

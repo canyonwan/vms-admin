@@ -51,8 +51,10 @@
       <!--提交 重置 展开 收起 按钮-->
       <n-gi :span="isInline ? '' : 24" :suffix="isInline ? true : false" #="{ overflow }" v-if="getProps.showActionButtonGroup">
         <n-space align="center" :justify="getProps.buttonPosition" :style="{ 'margin-left': `${isInline ? 12 : getProps.labelWidth}px` }">
+          <!-- 取消 -->
+          <n-button text v-if="getProps.showCancelButton" v-bind="getSubmitBtnOptions" @click="handleCancel" :loading="loadingSub">{{ getProps.cancelButtonText }} </n-button>
+          <!-- 提交 -->
           <n-button v-if="getProps.showSubmitButton" v-bind="getSubmitBtnOptions" @click="handleSubmit" :loading="loadingSub">{{ getProps.submitButtonText }} </n-button>
-          <n-button ghost v-if="getProps.showCancelButton" v-bind="getSubmitBtnOptions" @click="handleCancel" :loading="loadingSub">{{ getProps.cancelButtonText }} </n-button>
           <n-button v-if="getProps.showResetButton" v-bind="getResetBtnOptions" @click="resetFields">{{ getProps.resetButtonText }}</n-button>
           <n-button type="primary" text icon-placement="right" v-if="isInline && getProps.showAdvancedButton" @click="unfoldToggle">
             <template #icon>
@@ -93,7 +95,7 @@
     props: {
       ...basicProps
     },
-    emits: ['reset', 'submit', 'register'],
+    emits: ['reset', 'submit', 'register', 'cancel'],
     setup(props, { emit, attrs }) {
       const defaultFormModel = ref<Recordable>({})
       const formModel = reactive<Recordable>({})
@@ -199,7 +201,7 @@
       }
 
       function handleCancel() {
-        console.log('%c [ BasicForm cancel ]-271', 'font-size:13px; background:pink; color:#bf2c9f;')
+        emit('cancel')
       }
 
       async function setProps(formProps: Partial<FormProps>): Promise<void> {
