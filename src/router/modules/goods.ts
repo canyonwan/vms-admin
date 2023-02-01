@@ -36,7 +36,7 @@ const routes: Array<RouteRecordRaw> = [
           permissions: ['goods_list'],
           isRoot: false
         },
-        component: () => import('@/views/goods/menu/menu.vue')
+        component: () => import('@/views/goods/goods/goods.vue')
       }
     ]
   }
