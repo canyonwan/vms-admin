@@ -1,4 +1,4 @@
-import { ComponentType } from './index'
+import { ComponentDataSourceType, ComponentType, FieldValueType } from './index'
 import type { CSSProperties } from 'vue'
 import type { GridProps, GridItemProps } from 'naive-ui/lib/grid'
 import type { ButtonProps } from 'naive-ui/lib/button'
@@ -10,8 +10,13 @@ export interface FormSchema {
   labelMessage?: string
   labelMessageStyle?: object | string
   defaultValue?: any
+  fieldValueType?: FieldValueType // 字段值的类型
   component?: ComponentType
+  componentSource?: any // 组件源
   componentProps?: object
+  componentDataSourceType?: ComponentDataSourceType // 组件本身需要的数据源
+  componentDataSourceName?: string // 当组件数据源为字典时， 需要查询的字典名称
+  componentDataSourceEnumPrefix?: string // 枚举prefix, 用于筛选枚举集合
   slot?: string
   rules?: object | object[]
   giProps?: GridItemProps
