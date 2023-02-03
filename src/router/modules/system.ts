@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import { Layout } from '@/router/constant'
-import { OptionsSharp } from '@vicons/ionicons5'
+import { SettingsRound } from '@vicons/material'
 import { renderIcon } from '@/utils/index'
 
 /**
@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     meta: {
       title: '系统设置',
-      icon: renderIcon(OptionsSharp),
+      icon: renderIcon(SettingsRound),
       permissions: ['system'],
       sort: 2
     },
@@ -53,6 +53,22 @@ const routes: Array<RouteRecordRaw> = [
           permissions: ['system_user']
         },
         component: () => import('@/views/system/user/user.vue')
+      },
+      {
+        path: 'account',
+        name: 'setting-account',
+        meta: {
+          title: '个人设置'
+        },
+        component: () => import('@/views/setting/account/account.vue')
+      },
+      {
+        path: 'system',
+        name: 'setting-system',
+        meta: {
+          title: '系统设置'
+        },
+        component: () => import('@/views/setting/system/system.vue')
       }
     ]
   }

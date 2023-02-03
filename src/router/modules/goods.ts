@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import { Layout } from '@/router/constant'
-import { OptionsSharp } from '@vicons/ionicons5'
+import { ShopifyRound } from '@vicons/material'
 import { renderIcon } from '@/utils/index'
 
 /**
@@ -22,9 +22,10 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     meta: {
       title: '商品管理',
-      icon: renderIcon(OptionsSharp),
+      icon: renderIcon(ShopifyRound),
       permissions: ['goods_list'],
       sort: 1,
+      alwaysShow: true,
       isRoot: false
     },
     children: [
@@ -32,11 +33,28 @@ const routes: Array<RouteRecordRaw> = [
         path: 'list',
         name: 'goods_list',
         meta: {
-          title: '我的商品',
-          permissions: ['goods_list'],
-          isRoot: false
+          title: '商品列表',
+          permissions: ['goods_list']
         },
-        component: () => import('@/views/goods/goods/goods.vue')
+        component: () => import('@/views/goods/list/index.vue')
+      },
+      {
+        path: 'category',
+        name: 'goods_category',
+        meta: {
+          title: '商品分类',
+          permissions: ['goods_category']
+        },
+        component: () => import('@/views/goods/category/index.vue')
+      },
+      {
+        path: 'coupon',
+        name: 'goods_coupon',
+        meta: {
+          title: '商品优惠券',
+          permissions: ['goods_coupon']
+        },
+        component: () => import('@/views/goods/coupon/index.vue')
       }
     ]
   }

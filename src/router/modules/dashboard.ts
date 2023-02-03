@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import { Layout } from '@/router/constant'
-import { DashboardOutlined } from '@vicons/antd'
+import { DashboardRound } from '@vicons/material'
 import { renderIcon } from '@/utils/index'
 
 const routeName = 'dashboard'
@@ -23,7 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     meta: {
       title: '工作台',
-      icon: renderIcon(DashboardOutlined),
+      icon: renderIcon(DashboardRound),
       sort: 0
     },
     children: [
