@@ -1,12 +1,13 @@
 <template>
   <div>
-    <basic-form @register="register" @submit="onSubmit" />
+    <basic-form @register="register" @submit="onSubmit" @cancel="onCancel" />
   </div>
 </template>
 
 <script setup lang="ts">
   import { useForm } from '@/components/Form'
   import { schemasForm } from '../schemas'
+  const emit = defineEmits(['cancel'])
 
   const [register] = useForm({
     inline: true,
@@ -20,5 +21,9 @@
 
   function onSubmit(options: any) {
     console.log('%c [ options ]-23', 'font-size:13px; background:pink; color:#bf2c9f;', options)
+  }
+
+  function onCancel() {
+    emit('cancel')
   }
 </script>

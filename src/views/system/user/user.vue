@@ -21,7 +21,7 @@
       </BasicTable>
     </n-card>
     <basic-modal @register="modalRegister" style="width: 70%">
-      <save-user />
+      <save-user @cancel="onCancel" />
     </basic-modal>
   </div>
 </template>
@@ -68,7 +68,7 @@
       })
     }
   })
-  const [modalRegister, { openModal, setProps }] = useModal({})
+  const [modalRegister, { openModal, closeModal, setProps }] = useModal({})
 
   const loadDataTable = async (res: any) => {
     let params = {
@@ -106,5 +106,9 @@
   function addUser() {
     openModal()
     setProps({ title: '添加用户' })
+  }
+
+  function onCancel() {
+    closeModal()
   }
 </script>
