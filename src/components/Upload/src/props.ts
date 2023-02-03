@@ -30,5 +30,14 @@ export const basicProps = {
   height: {
     type: Number as PropType<number>,
     default: 104 //建议不小于这个尺寸 太小页面可能显示有异常
+  },
+  disabled: {
+    type: Boolean,
+    default: undefined
+  },
+  isControlUpload: {
+    // 外部按钮控制上传
+    type: Boolean,
+    default: false
   }
 }
