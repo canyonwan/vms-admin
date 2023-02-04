@@ -7,3 +7,7 @@ export interface IFileInfo {
   fileTypeName: string
   userId: number
 }
+export interface BasicPageInput {
+  page: number
+  size: number
+}
