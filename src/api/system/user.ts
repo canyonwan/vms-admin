@@ -1,17 +1,12 @@
 import { http } from '@/utils/http/axios'
-import { IUserItem } from './types'
-import { IResultPage } from '@/utils/http/axios/types'
+import type { IUserItem } from './types'
+import type { IResultPage } from '@/utils/http/axios/types'
+import { BasicPageInput } from '../types/common'
 
 export interface BasicResponseModel<T = any> {
   code: number
   message: string
   data: T
-}
-
-export interface BasicPageParams {
-  page: number
-  size: number
-  total: number
 }
 
 /**
@@ -27,7 +22,7 @@ export function getUserInfo() {
 /**
  * @description: 获取用户列表
  */
-export function getUserList(params: BasicPageParams): Promise<IResultPage<IUserItem[]>> {
+export function getUserList(params: BasicPageInput): Promise<IResultPage<IUserItem[]>> {
   return http.request({
     url: 'user/page',
     method: 'get',
