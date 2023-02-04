@@ -24,3 +24,11 @@ export interface IPermissionItem {
   path: string
   children?: IPermissionItem[]
 }
+export interface IRoleItem {
+  id?: number
+  roleName: string
+  roleDesc: string
+  createdAt: string
+  updatedAt: string
+  deletedAt?: string
+}
