@@ -35,9 +35,9 @@ export function saveRole(params) {
 }
 
 /**
- * @description: 保存角色权限
+ * @description: 绑定角色权限
  */
-export function bindRolePermissions(params): Promise<void> {
+export function bindRolePermissions(params: { roleId: number; permissionIds: string }): Promise<void> {
   return http.request({
     url: 'role/permission',
     method: 'post',
@@ -53,5 +53,15 @@ export function removeRolePermissions(params): Promise<void> {
     url: 'role/permission',
     method: 'delete',
     data: params
+  })
+}
+
+/**
+ * @description: 已绑定的的权限菜单列表
+ */
+export function queryBoundMenus(id: number): Promise<{ list: number[] }> {
+  return http.request({
+    url: `role/permission/${id}`,
+    method: 'get'
   })
 }

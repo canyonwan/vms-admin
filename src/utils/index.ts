@@ -171,7 +171,7 @@ export function getTreeItem(data: any[], key?: string | number): any {
 const treeAll: any[] = []
 export function getTreeAll(data: any[]): any[] {
   data.map((item) => {
-    treeAll.push(item.key)
+    treeAll.push(item.id)
     if (item.children && item.children.length) {
       getTreeAll(item.children)
     }

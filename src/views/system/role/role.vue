@@ -1,12 +1,9 @@
 <template>
   <div>
-    <div class="n-layout-page-header">
-      <n-card :bordered="false" title="角色权限管理"> 页面数据为 Mock 示例数据，非真实数据。 </n-card>
-    </div>
     <n-card :bordered="false" class="mt-4 proCard">
-      <BasicTable :columns="columns" :request="loadDataTable" :row-key="(row) => row.id" ref="actionRef" :actionColumn="actionColumn" @update:checked-row-keys="onCheckedRow">
+      <BasicTable :columns="columns" :request="loadDataTable" :row-key="(row: IRoleItem) => row.id" ref="actionRef" :actionColumn="actionColumn">
         <template #tableTitle>
-          <n-button type="primary">
+          <n-button type="primary" @click="onSaveRole">
             <template #icon>
               <n-icon>
                 <PlusOutlined />
@@ -22,18 +19,23 @@
       </BasicTable>
     </n-card>
 
+    <basic-modal @register="modalRegister" style="width: 70%">
+      <save-role @cancel="onCancel" @ok="onOk" :item="role" />
+    </basic-modal>
+
     <n-modal v-model:show="showModal" :show-icon="false" preset="dialog" :title="editRoleTitle">
       <div class="py-3 menu-list">
         <n-tree
+          label-field="name"
+          key-field="id"
           block-line
-          cascade
           checkable
           :virtual-scroll="true"
           :data="treeData"
           :expandedKeys="expandedKeys"
           :checked-keys="checkedKeys"
           style="max-height: 950px; overflow: hidden"
-          @update:checked-keys="checkedTree"
+          @update:checked-keys="onCheckedTree"
           @update:expanded-keys="onExpandedKeys"
         />
       </div>
@@ -50,32 +52,33 @@
 </template>
 
 <script lang="ts" setup>
-  import { reactive, ref, unref, h, onMounted } from 'vue'
-  import { useMessage } from 'naive-ui'
+  import { useDialog, useMessage } from 'naive-ui'
   import { BasicTable, TableAction } from '@/components/Table'
-  import { getRoleList } from '@/api/system/role'
-  // import { getMenuList } from '@/api/system/menu';
+  import { bindRolePermissions, deleteRole, getRoleList, queryBoundMenus } from '@/api/system/role'
   import { columns } from './columns'
   import { PlusOutlined } from '@vicons/antd'
   import { getTreeAll } from '@/utils'
-  import { useRouter } from 'vue-router'
+  import type { IPermissionItem, IRoleItem } from '@/api/system/types'
+  import { queryPermissionList } from '@/api/system/menu'
+  import { useModal } from '@/components/Modal'
+  import SaveRole from './components/save-role.vue'
 
-  const router = useRouter()
-  const formRef: any = ref(null)
   const message = useMessage()
   const actionRef = ref()
-
+  const role = ref<IRoleItem>()
   const showModal = ref(false)
   const formBtnLoading = ref(false)
   const checkedAll = ref(false)
   const editRoleTitle = ref('')
-  const treeData = ref([])
-  const expandedKeys = ref([])
-  const checkedKeys = ref(['console', 'step-form'])
+  const roleId = ref()
+  const treeData = ref<IPermissionItem[]>([])
+  const expandedKeys = ref<number[]>([])
+  const checkedKeys = ref<number[]>([])
+
+  const [modalRegister, { openModal, closeModal, setProps }] = useModal({})
 
   const params = reactive({
-    pageSize: 5,
-    name: 'xiaoMa'
+    page: 1
   })
 
   const actionColumn = reactive({
@@ -83,37 +86,24 @@
     title: '操作',
     key: 'action',
     fixed: 'right',
-    render(record) {
+    render(record: IRoleItem) {
       return h(TableAction, {
         style: 'button',
         actions: [
           {
             label: '菜单权限',
-            onClick: handleMenuAuth.bind(null, record),
-            // 根据业务控制是否显示 isShow 和 auth 是并且关系
-            ifShow: () => {
-              return true
-            },
-            // 根据权限控制是否显示: 有权限，会显示，支持多个
-            auth: ['basic_list']
+            type: 'info',
+            onClick: handleMenuAuth.bind(null, record)
           },
           {
             label: '编辑',
-            onClick: handleEdit.bind(null, record),
-            ifShow: () => {
-              return true
-            },
-            auth: ['basic_list']
+            type: 'primary',
+            onClick: handleEdit.bind(null, record)
           },
           {
             label: '删除',
-            onClick: handleDelete.bind(null, record),
-            // 根据业务控制是否显示 isShow 和 auth 是并且关系
-            ifShow: () => {
-              return true
-            },
-            // 根据权限控制是否显示: 有权限，会显示，支持多个
-            auth: ['basic_list']
+            type: 'error',
+            onClick: handleDelete.bind(null, record)
           }
         ]
       })
@@ -128,52 +118,61 @@
     return await getRoleList(_params)
   }
 
-  function onCheckedRow(rowKeys: any[]) {
-    console.log(rowKeys)
-  }
-
   function reloadTable() {
     actionRef.value.reload()
   }
 
-  function confirmForm(e: any) {
+  async function confirmForm(e: any) {
     e.preventDefault()
     formBtnLoading.value = true
-    formRef.value.validate((errors) => {
-      if (!errors) {
-        message.success('新建成功')
-        setTimeout(() => {
-          showModal.value = false
-          reloadTable()
-        })
-      } else {
-        message.error('请填写完整信息')
+    await bindRolePermissions({
+      roleId: roleId.value,
+      permissionIds: checkedKeys.value.join(',')
+    })
+    formBtnLoading.value = false
+    message.success('绑定成功')
+    showModal.value = false
+  }
+
+  function handleEdit(record: IRoleItem) {
+    role.value = record
+    setProps({ title: '编辑角色' })
+    openModal()
+  }
+
+  const dialog = useDialog()
+  function handleDelete(record: IRoleItem) {
+    dialog.info({
+      title: '提示',
+      content: `您确定想删除[${record.roleName}]角色吗?`,
+      positiveText: '确定',
+      negativeText: '取消',
+      onPositiveClick: async () => {
+        await deleteRole(record.id!)
+        message.success('删除成功')
+        reloadTable()
       }
-      formBtnLoading.value = false
     })
   }
 
-  function handleEdit(record: Recordable) {
-    console.log('点击了编辑', record)
-    router.push({ name: 'basic-info', params: { id: record.id } })
-  }
-
-  function handleDelete(record: Recordable) {
-    console.log('点击了删除', record)
-    message.info('点击了删除')
-  }
-
-  function handleMenuAuth(record: Recordable) {
-    editRoleTitle.value = `分配 ${record.name} 的菜单权限`
-    checkedKeys.value = record.menu_keys
+  function handleMenuAuth(record: IRoleItem) {
+    editRoleTitle.value = `分配 ${record.roleName} 的菜单权限`
+    roleId.value = record.id!
     showModal.value = true
+    getBoundMenu()
   }
 
-  function checkedTree(keys) {
-    checkedKeys.value = [checkedKeys.value, ...keys]
+  async function getBoundMenu() {
+    const { list } = await queryBoundMenus(roleId.value)
+    checkedKeys.value = list.map((item: number) => item)
   }
 
-  function onExpandedKeys(keys) {
+  function onCheckedTree(keys: number[]) {
+    checkedKeys.value = keys
+    // checkedKeys.value = [checkedKeys.value, ...keys]
+  }
+
+  function onExpandedKeys(keys: number[]) {
     expandedKeys.value = keys
   }
 
@@ -181,7 +180,7 @@
     if (expandedKeys.value.length) {
       expandedKeys.value = []
     } else {
-      expandedKeys.value = treeData.value.map((item: any) => item.key) as []
+      expandedKeys.value = treeData.value.map((item: IPermissionItem) => item.id) as []
     }
   }
 
@@ -195,11 +194,26 @@
     }
   }
 
-  onMounted(async () => {
-    // const treeMenuList = await getMenuList();
-    // expandedKeys.value = treeMenuList.list.map((item) => item.key);
-    // treeData.value = treeMenuList.list;
-  })
-</script>
+  onMounted(() => loadPermissionData())
 
-<style lang="less" scoped></style>
+  async function loadPermissionData() {
+    const { list } = await queryPermissionList()
+    expandedKeys.value = list.map((item) => item.id!)
+    treeData.value = list
+  }
+
+  function onSaveRole() {
+    setProps({ title: '新增角色' })
+    openModal()
+    role.value = undefined
+  }
+
+  function onOk() {
+    reloadTable()
+    closeModal()
+  }
+
+  function onCancel() {
+    closeModal()
+  }
+</script>
