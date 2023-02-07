@@ -3,11 +3,11 @@ import { RouteRecordRaw } from 'vue-router'
 import { Layout, ParentLayout } from '@/router/constant'
 import type { AppRouteRecordRaw } from '@/router/types'
 
-const Iframe = () => import('@/views/iframe/index.vue')
+// const Iframe = () => import('@/views/iframe/index.vue')
 const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>()
 
 LayoutMap.set('LAYOUT', Layout)
-LayoutMap.set('IFRAME', Iframe)
+// LayoutMap.set('IFRAME', Iframe)
 
 /**
  * 格式化 后端 结构信息并递归生成层级路由表
@@ -86,10 +86,7 @@ export const asyncImportRoute = (routes: AppRouteRecordRaw[] | undefined): void 
 /**
  * 动态导入
  * */
-export const dynamicImport = (
-  viewsModules: Record<string, () => Promise<Recordable>>,
-  component: string
-) => {
+export const dynamicImport = (viewsModules: Record<string, () => Promise<Recordable>>, component: string) => {
   const keys = Object.keys(viewsModules)
   const matchKeys = keys.filter((key) => {
     let k = key.replace('../views', '')
@@ -102,9 +99,7 @@ export const dynamicImport = (
     return viewsModules[matchKey]
   }
   if (matchKeys?.length > 1) {
-    console.warn(
-      'Please do not create `.vue` and `.TSX` files with the same file name in the same hierarchical directory under the views folder. This will cause dynamic introduction failure'
-    )
+    console.warn('Please do not create `.vue` and `.TSX` files with the same file name in the same hierarchical directory under the views folder. This will cause dynamic introduction failure')
     return
   }
 }
