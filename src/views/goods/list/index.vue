@@ -30,13 +30,16 @@
   import { TableAction } from '@/components/Table'
   import { PlusOutlined } from '@vicons/antd'
   import { columns } from './columns'
-  // import { getUserList } from '@/api/system/user'
   import { useModal } from '@/components/Modal'
-  import type { IUserItem } from '@/api/system/types'
   import { useDialog } from 'naive-ui'
+  import { deleteGoods, queryGoodsPage } from '@/api/goods/goods'
+  import { IGoodsItem } from '@/api/goods/types'
 
+  const actionRef = ref()
   const searchParams = reactive({
-    page: 1
+    page: 1,
+    name: '',
+    price: ''
   })
 
   const actionColumn = reactive({
@@ -44,13 +47,13 @@
     title: '操作',
     key: 'action',
     fixed: 'right',
-    render(record) {
+    render(record: IGoodsItem) {
       return h(TableAction, {
         style: 'button',
         actions: [
           {
-            label: !record.status ? '禁用' : '启用',
-            type: record.status ? 'success' : 'error',
+            label: record.status ? '下架' : '上架',
+            type: record.status ? 'error' : 'success',
             onClick: onChangeStatus.bind(null, record)
           },
           {
@@ -74,36 +77,40 @@
       ...unref(searchParams),
       ...res
     }
-    // return await getUserList(params)
+    return await queryGoodsPage(params)
   }
 
-  function onChangeStatus(rows: IUserItem) {
+  function reloadTable() {
+    actionRef.value.reload()
+  }
+
+  function onChangeStatus(rows: IGoodsItem) {
     console.log('%c [ rows ]-87', 'font-size:13px; background:pink; color:#bf2c9f;', rows)
   }
 
-  function onEdit(rows: IUserItem) {
+  function onEdit(rows: IGoodsItem) {
     openModal()
-    setProps({ title: '编辑用户' })
+    setProps({ title: '编辑商品' })
     console.log('%c [ rows ]-90', 'font-size:13px; background:pink; color:#bf2c9f;', rows)
   }
 
   const dialog = useDialog()
-  function onDelete(row: IUserItem) {
+  function onDelete(row: IGoodsItem) {
     dialog.error({
       title: '提示',
-      content: `你确定要删除用户[${row.realName}]吗？`,
+      content: `你确定要删除商品[${row.name}]吗？`,
       positiveText: '确定',
       negativeText: '取消',
       onPositiveClick: async () => {
         console.log('%c [ rows ]-93', 'font-size:13px; background:pink; color:#bf2c9f;', row)
-        // await deleteCauseType(id)
-        // getCauseTypes()
+        await deleteGoods(row.id!)
+        reloadTable()
       }
     })
   }
 
   function addUser() {
     openModal()
-    setProps({ title: '添加用户' })
+    setProps({ title: '添加商品' })
   }
 </script>
