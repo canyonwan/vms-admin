@@ -68,5 +68,5 @@ export interface IResultPage<T> {
   total: number
   size: number
   page: number
-  contents: T
+  contents: T[]
 }
