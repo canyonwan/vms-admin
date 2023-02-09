@@ -26,3 +26,13 @@ export interface IGoodsPageInput {
   cover: string
   desc: string
 }
+
+export interface IGoodsCategoryTreeItem {
+  id: number
+  parentId: number
+  picUrl: string
+  categoryName: string
+  level: number
+  sort: number
+  children?: IGoodsCategoryTreeItem[]
+}
