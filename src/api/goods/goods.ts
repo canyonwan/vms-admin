@@ -24,6 +24,26 @@ export function queryGoodsCategoryPage(params: any): Promise<IResultPage<IGoodsC
 }
 
 /**
+ * @description: 删除商品分类分页
+ */
+export function deleteGoodsCategory(id: number): Promise<void> {
+  return http.request({
+    url: `category/${id}`,
+    method: 'delete'
+  })
+}
+/**
+ * @description: 保存商品分类分页
+ */
+export function saveGoodsCategory(params: any): Promise<void> {
+  return http.request({
+    url: 'category',
+    method: params.id ? 'put' : 'post',
+    data: params
+  })
+}
+
+/**
  * @description: 删除商品
  */
 export function deleteGoods(id: number): Promise<void> {

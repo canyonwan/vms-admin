@@ -28,11 +28,10 @@ export interface IGoodsPageInput {
 }
 
 export interface IGoodsCategoryTreeItem {
-  id: number
+  id?: number
   parentId: number
-  picUrl: string
+  picUrl?: string
   categoryName: string
-  level: number
-  sort: number
+  sort: string
   children?: IGoodsCategoryTreeItem[]
 }

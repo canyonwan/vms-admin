@@ -86,9 +86,6 @@
             <n-form-item label="排序" path="sort">
               <n-input placeholder="请输入排序" v-model:value="state.formData.sort" />
             </n-form-item>
-            <n-form-item label="层级">
-              <n-input placeholder="请输入层级" v-model:value="state.formData.level" />
-            </n-form-item>
             <n-form-item path="auth" style="margin-left: 100px">
               <n-space>
                 <n-button type="primary" :loading="subLoading" @click="formSubmit">保存修改</n-button>
@@ -100,22 +97,23 @@
         </n-card>
       </n-gi>
     </n-grid>
-    <!-- <CreateDrawer ref="createDrawerRef" :tree-item="treeItem" :title="drawerTitle" @handle-ok="onOk" /> -->
+    <CreateDrawer ref="createDrawerRef" :tree-item="treeItem" :title="drawerTitle" @handle-ok="onOk" />
   </div>
 </template>
 <script lang="ts" setup>
   import { useDialog, useMessage } from 'naive-ui'
   import { DownOutlined, AlignLeftOutlined, SearchOutlined, FormOutlined } from '@vicons/antd'
   import { getTreeItem } from '@/utils'
-  // import CreateDrawer from './CreateDrawer.vue'
-  import { queryGoodsCategoryTree } from '@/api/goods/goods'
+  import CreateDrawer from './CreateDrawer.vue'
+  import { deleteGoodsCategory, queryGoodsCategoryTree, saveGoodsCategory } from '@/api/goods/goods'
   import type { IGoodsCategoryTreeItem } from '@/api/goods/types'
 
   const rules = {
     categoryName: {
       required: true,
       message: '请输入商品分类名称',
-      trigger: 'change'
+      trigger: 'change',
+      type: 'string'
     },
     sort: {
       required: true,
@@ -138,8 +136,7 @@
   const defaultValue = () => ({
     parentId: 0,
     categoryName: '',
-    level: 0,
-    sort: 0
+    sort: ''
   })
 
   const loading = ref(true)
@@ -171,7 +168,11 @@
   })
 
   function selectAddMenu(key: string) {
-    // drawerTitle.value = key === 'home' ? '添加顶栏商品分类' : `添加子商品分类：${treeItem.value!.categoryName}`
+    drawerTitle.value = key === 'home' ? '添加顶栏商品分类' : `添加子商品分类：${treeItem.value!.categoryName}`
+    if (key === 'home') {
+      treeItem.value = undefined
+      treeItemKey.value = []
+    }
     openCreateDrawer()
   }
 
@@ -190,32 +191,27 @@
     if (keys.length) {
       treeItem.value = getTreeItem(unref(treeData), keys[0])
       treeItemKey.value = keys
-      // treeItemTitle.value = treeItem.value!.categoryName
       Object.assign(state.formData, treeItem.value)
       isEditMenu.value = true
     } else {
       isEditMenu.value = false
       treeItemKey.value = []
       treeItem.value = undefined
-      // treeItemTitle.value = ''
     }
   }
 
   function handleDel() {
     dialog.info({
       title: '提示',
-      // content: `您确定想删除[${treeItem.value!.categoryName}]权限吗?`,
+      content: `您确定想删除[${treeItem.value!.categoryName}]删除吗?`,
       positiveText: '确定',
       negativeText: '取消',
       onPositiveClick: async () => {
-        // await deletePermission(treeItem.value!.id!)
+        await deleteGoodsCategory(treeItem.value!.id!)
         loadData()
         isEditMenu.value = false
         treeItemKey.value = []
         treeItem.value = undefined
-        // treeItemTitle.value = ''
-        // treeItem.value!.id! = 0
-        // treeItemId.value = 0
         message.success('删除成功')
       }
     })
@@ -229,7 +225,12 @@
   function formSubmit() {
     formRef.value.validate(async (errors: any) => {
       if (!errors) {
-        // await savePermission(state.formData)
+        const params = {
+          id: treeItem.value?.id,
+          categoryName: state.formData.categoryName,
+          sort: state.formData.sort
+        }
+        await saveGoodsCategory(params)
         message.success('修改成功')
         loadData()
       } else {
