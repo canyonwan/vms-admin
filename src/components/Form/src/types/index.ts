@@ -47,28 +47,7 @@ export type ComponentType =
  * CheckedTargetType 检查对象
  */
 
-export type ComponentDataSourceType =
-  | 'Dictionaries'
-  | 'Position'
-  | 'Department'
-  | 'Industry'
-  | 'ProgramType'
-  | 'documentModelDataType'
-  | 'documentModelType'
-  | 'documentModelUseWord'
-  | 'RelaEvidenceType'
-  | 'DiscretionType'
-  | 'DiscretionCalculateType'
-  | 'ApprovalType'
-  | 'RoleType'
-  | 'ModelType'
-  | 'EnumsType'
-  | 'TipType'
-  | 'CaseAttrType'
-  | 'CheckedTargetType'
-  | 'CauseTypeEnum'
-  | 'CaseType' // 处罚方式/案件类型
-  | 'ArchiveType' // 卷宗类型
+export type ComponentDataSourceType = 'goods' | 'goodsCategory' | 'permissionTree'
 
 /**
  * 自定义表单维护地方使用 上面添加 ComponentDataSourceType 和  ComponentDataSourceTypeData 保持一致
@@ -137,18 +116,6 @@ export const ComponentDataSourceTypeData = [
   {
     label: '提示信息类型',
     value: 'TipType'
-  },
-  {
-    label: '违法行为属性类型',
-    value: 'CaseAttrType'
-  },
-  {
-    label: '违法行为类型',
-    value: 'CauseTypeEnum'
-  },
-  {
-    label: '处罚方式',
-    value: 'CaseType'
   }
 ]
 /**
