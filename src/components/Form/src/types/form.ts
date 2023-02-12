@@ -13,7 +13,7 @@ export interface FormSchema {
   fieldValueType?: FieldValueType // 字段值的类型
   component?: ComponentType
   componentSource?: any // 组件源
-  componentProps?: object
+  componentProps?: any
   componentDataSourceType?: ComponentDataSourceType // 组件本身需要的数据源
   componentDataSourceName?: string // 当组件数据源为字典时， 需要查询的字典名称
   componentDataSourceEnumPrefix?: string // 枚举prefix, 用于筛选枚举集合
