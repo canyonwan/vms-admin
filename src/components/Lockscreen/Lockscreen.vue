@@ -33,7 +33,7 @@
             <user-outlined />
           </n-icon>
         </n-avatar>
-        <div class="username">{{ loginParams.username }}</div>
+        <div class="username">{{ loginParams.account }}</div>
         <n-input type="password" autofocus v-model:value="loginParams.password" @keyup.enter="onLogin" placeholder="请输入登录密码">
           <template #suffix>
             <n-icon @click="onLogin" style="cursor: pointer">
