@@ -31,15 +31,7 @@ const transform: AxiosTransform = {
    * @description: 处理请求数据
    */
   transformRequestData: (res: AxiosResponse<IResult>, options: RequestOptions) => {
-    const {
-      isShowMessage = true,
-      isShowErrorMessage,
-      isShowSuccessMessage,
-      successMessageText,
-      errorMessageText,
-      isTransformResponse,
-      isReturnNativeResponse
-    } = options
+    const { isShowMessage = true, isShowErrorMessage, isShowSuccessMessage, successMessageText, errorMessageText, isTransformResponse, isReturnNativeResponse } = options
 
     // 是否返回原生响应头 比如：需要获取响应头时使用该属性
     if (isReturnNativeResponse) {
@@ -157,10 +149,7 @@ const transform: AxiosTransform = {
           config.params = undefined
         }
         if (joinParamsToUrl) {
-          config.url = setObjToUrlParams(
-            config.url as string,
-            Object.assign({}, config.params, config.data)
-          )
+          config.url = setObjToUrlParams(config.url as string, Object.assign({}, config.params, config.data))
         }
       } else {
         // 兼容restful风格
@@ -180,9 +169,7 @@ const transform: AxiosTransform = {
     const token = userStore.getToken
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
-      ;(config as Recordable).headers.Authorization = options.authenticationScheme
-        ? `${options.authenticationScheme} ${token}`
-        : `Bearer ${token}`
+      ;(config as Recordable).headers.Authorization = options.authenticationScheme ? `${options.authenticationScheme} ${token}` : `Bearer ${token}`
     }
     return config
   },
@@ -195,8 +182,7 @@ const transform: AxiosTransform = {
     const $message = window['$message']
     const { response, code, message } = error || {}
     // TODO 此处要根据后端接口返回格式修改
-    const msg: string =
-      response && response.data && response.data.message ? response.data.message : ''
+    const msg: string = response && response.data && response.data.message ? response.data.message : ''
     const err: string = error.toString()
     try {
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
