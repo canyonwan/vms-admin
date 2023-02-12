@@ -1,6 +1,6 @@
 import { http } from '@/utils/http/axios'
 import type { IResultPage } from '@/utils/http/axios/types'
-import type { IGoodsCategoryTreeItem, IGoodsItem, IGoodsPageInput } from './types'
+import type { IGoodsCategoryTreeItem, IGoodsItem } from './types'
 
 /**
  * @description: 商品分页
@@ -56,7 +56,7 @@ export function deleteGoods(id: number): Promise<void> {
 /**
  * @description: 保存商品
  */
-export function saveGoods(params: IGoodsPageInput): Promise<void> {
+export function saveGoods(params: IGoodsItem): Promise<void> {
   return http.request({
     url: 'goods',
     method: params.id ? 'put' : 'post',

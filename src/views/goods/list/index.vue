@@ -6,7 +6,7 @@
     <n-card :bordered="false" class="mt-4 proCard">
       <BasicTable :columns="columns" :request="loadDataTable" :row-key="(row) => row.id" ref="actionRef" :actionColumn="actionColumn" scroll-x="1070">
         <template #tableTitle>
-          <n-button type="primary" @click="addUser">
+          <n-button type="primary" @click="addGoods">
             <template #icon>
               <n-icon>
                 <PlusOutlined />
@@ -21,7 +21,7 @@
       </BasicTable>
     </n-card>
     <basic-modal @register="modalRegister" style="width: 70%">
-      <!-- <save-user /> -->
+      <save-goods :goods="goods" @ok="onOk" @cancel="onCancel" />
     </basic-modal>
   </div>
 </template>
@@ -34,8 +34,10 @@
   import { useDialog } from 'naive-ui'
   import { deleteGoods, queryGoodsPage } from '@/api/goods/goods'
   import { IGoodsItem } from '@/api/goods/types'
+  import SaveGoods from '@/views/goods/list/components/SaveGoods.vue'
 
   const actionRef = ref()
+  const goods = ref<IGoodsItem>()
   const searchParams = reactive({
     page: 1,
     name: '',
@@ -70,7 +72,7 @@
       })
     }
   })
-  const [modalRegister, { openModal, setProps }] = useModal({})
+  const [modalRegister, { openModal, setProps, closeModal }] = useModal({})
 
   const loadDataTable = async (res: any) => {
     let params = {
@@ -85,13 +87,22 @@
   }
 
   function onChangeStatus(rows: IGoodsItem) {
-    console.log('%c [ rows ]-87', 'font-size:13px; background:pink; color:#bf2c9f;', rows)
+    console.log('%c [ rows ]-90', 'font-size:13px; background:pink; color:#bf2c9f;', rows)
+  }
+
+  function onOk() {
+    reloadTable()
+    closeModal()
+  }
+
+  function onCancel() {
+    closeModal()
   }
 
   function onEdit(rows: IGoodsItem) {
+    goods.value = rows
     openModal()
     setProps({ title: '编辑商品' })
-    console.log('%c [ rows ]-90', 'font-size:13px; background:pink; color:#bf2c9f;', rows)
   }
 
   const dialog = useDialog()
@@ -102,14 +113,14 @@
       positiveText: '确定',
       negativeText: '取消',
       onPositiveClick: async () => {
-        console.log('%c [ rows ]-93', 'font-size:13px; background:pink; color:#bf2c9f;', row)
         await deleteGoods(row.id!)
         reloadTable()
       }
     })
   }
 
-  function addUser() {
+  function addGoods() {
+    goods.value = undefined
     openModal()
     setProps({ title: '添加商品' })
   }

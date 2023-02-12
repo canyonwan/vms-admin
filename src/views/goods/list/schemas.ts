@@ -1,57 +1,90 @@
 import { FormSchema } from '@/components/Form/src/types/form'
+import { NCascader } from 'naive-ui'
 
 export const schemasForm: FormSchema[] = [
   {
-    field: 'phone',
+    field: 'name',
     component: 'NInput',
-    label: '手机',
-    componentProps: {}
+    label: '商品名称',
+    giProps: {
+      span: 2
+    },
+    componentProps: {},
+    rules: [{ required: true, message: '请输入商品名称', type: 'string', trigger: ['blur', 'change'] }]
   },
   {
-    field: 'realName',
+    field: 'desc',
     component: 'NInput',
-    label: '真实姓名',
-    componentProps: {}
+    label: '商品描述',
+    giProps: {
+      span: 2
+    },
+    componentProps: {
+      type: 'textarea'
+    },
+    rules: [{ required: true, message: '请输入商品描述', type: 'string', trigger: ['blur', 'change'] }]
   },
   {
-    field: 'password',
-    component: 'NInput',
-    label: '密码',
-    componentProps: {}
+    field: 'price',
+    component: 'NInputNumber',
+    label: '商品价格',
+    componentProps: {
+      precision: '2',
+      placeholder: '请输入商品价格'
+    },
+    rules: [{ required: true, message: '请输入商品价格', type: 'number', trigger: ['blur', 'change'] }]
   },
   {
-    field: 'permissions',
+    field: 'status',
     component: 'NSelect',
-    label: '权限',
-    componentProps: {}
-  },
-  {
-    field: 'platform',
-    component: 'NSelect',
-    label: '平台',
+    label: '商品状态',
     componentProps: {
       options: [
-        { label: '小程序端', value: 1 },
-        { label: '管理端', value: 2 }
+        { label: '上架', value: 1 },
+        { label: '下架', value: 0 }
       ]
     }
   },
   {
-    field: 'gender',
-    component: 'NSelect',
-    label: '性别',
+    field: 'categoryIds',
+    componentSource: shallowRef(NCascader),
+    label: '商品分类',
+    giProps: { span: 1 },
+    componentDataSourceType: 'goodsCategory',
     componentProps: {
-      options: [
-        { label: '女', value: 0 },
-        { label: '男', value: 1 },
-        { label: '未知', value: 2 }
-      ]
-    }
+      checkable: true,
+      placeholder: '请选择商品分类',
+      separator: '->',
+      checkStrategy: 'all',
+      cascade: true
+    },
+    rules: [{ required: true, message: '请输入商品分类', type: 'array', trigger: ['blur', 'change'] }]
   },
+  // {
+  //   field: 'twoLevelId',
+  //   component: 'NSelect',
+  //   label: '二级分类',
+  //   giProps: {
+  //     span: 1
+  //   },
+  //   componentProps: {}
+  // },
+  // {
+  //   field: 'threeLevelId',
+  //   component: 'NSelect',
+  //   label: '三级分类',
+  //   giProps: {
+  //     span: 1
+  //   },
+  //   componentProps: {}
+  // },
   {
-    field: 'avatar',
+    field: 'cover',
     component: 'NUpload',
-    label: '头像',
+    label: '商品主图',
+    giProps: {
+      span: 2
+    },
     componentProps: {
       accept: '.png,.jpg,.jpeg'
     }
