@@ -7,7 +7,11 @@
 <script setup lang="ts">
   import { useForm } from '@/components/Form'
   import { schemasForm } from '../schemas'
+  import schemaDataHandle from '@/components/Form/src/hooks/custom-form-data-handle'
+
   const emit = defineEmits(['cancel'])
+  const schemasRef = ref(schemasForm)
+  schemaDataHandle(schemasRef.value)
 
   const [register] = useForm({
     inline: true,

@@ -1,4 +1,5 @@
 import { FormSchema } from '@/components/Form/src/types/form'
+import { NTreeSelect } from 'naive-ui'
 
 export const schemasForm: FormSchema[] = [
   {
@@ -21,9 +22,14 @@ export const schemasForm: FormSchema[] = [
   },
   {
     field: 'permissions',
-    component: 'NSelect',
+    componentSource: shallowRef(NTreeSelect),
     label: '权限',
-    componentProps: {}
+    componentDataSourceType: 'permissionTree',
+    componentProps: {
+      multiple: true,
+      options: [],
+      checkable: true
+    }
   },
   {
     field: 'platform',
