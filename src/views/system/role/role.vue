@@ -59,7 +59,7 @@
   import { PlusOutlined } from '@vicons/antd'
   import { getTreeAll } from '@/utils'
   import type { IPermissionItem, IRoleItem } from '@/api/system/types'
-  import { queryPermissionList } from '@/api/system/menu'
+  import { queryPermissionTree } from '@/api/system/menu'
   import { useModal } from '@/components/Modal'
   import SaveRole from './components/save-role.vue'
 
@@ -197,7 +197,7 @@
   onMounted(() => loadPermissionData())
 
   async function loadPermissionData() {
-    const { list } = await queryPermissionList()
+    const { list } = await queryPermissionTree()
     expandedKeys.value = list.map((item) => item.id!)
     treeData.value = list
   }

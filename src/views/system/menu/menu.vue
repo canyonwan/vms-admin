@@ -108,7 +108,7 @@
   import { DownOutlined, AlignLeftOutlined, SearchOutlined, FormOutlined } from '@vicons/antd'
   import { getTreeItem } from '@/utils'
   import CreateDrawer from './CreateDrawer.vue'
-  import { deletePermission, queryPermissionList, savePermission } from '@/api/system/menu'
+  import { deletePermission, queryPermissionTree, savePermission } from '@/api/system/menu'
   import type { IPermissionItem } from '@/api/system/types'
 
   const rules = {
@@ -260,7 +260,7 @@
   })
 
   async function loadData() {
-    const { list } = await queryPermissionList()
+    const { list } = await queryPermissionTree()
     const keys = list.map((item: IPermissionItem) => item.id)
     Object.assign(state.formData, keys)
     treeData.value = list

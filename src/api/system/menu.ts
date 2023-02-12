@@ -4,7 +4,7 @@ import { IPermissionItem } from './types'
 /**
  * @description: 权限菜单列表
  */
-export function queryPermissionList(): Promise<{ list: IPermissionItem[] }> {
+export function queryPermissionTree(): Promise<{ list: IPermissionItem[] }> {
   return http.request({
     url: 'permission/tree',
     method: 'GET'
