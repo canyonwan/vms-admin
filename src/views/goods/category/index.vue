@@ -50,7 +50,6 @@
                   key-field="id"
                   block-line
                   cascade
-                  checkable
                   :virtual-scroll="true"
                   :pattern="pattern"
                   :data="treeData"
