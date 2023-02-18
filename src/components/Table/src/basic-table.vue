@@ -73,7 +73,6 @@
 </template>
 
 <script lang="ts">
-  import { ref, defineComponent, reactive, unref, toRaw, computed, toRefs, onMounted, nextTick } from 'vue'
   import { ReloadOutlined, ColumnHeightOutlined, QuestionCircleOutlined } from '@vicons/antd'
   import { createTableContext } from './hooks/useTableContext'
 
@@ -157,13 +156,13 @@
       })
 
       //页码切换
-      function updatePage(page) {
+      function updatePage(page: number) {
         setPagination({ page: page })
         reload()
       }
 
       //分页数量切换
-      function updatePageSize(size) {
+      function updatePageSize(size: number) {
         setPagination({ page: 1, pageSize: size })
         reload()
       }
@@ -174,9 +173,9 @@
       }
 
       //选中行
-      function updateCheckedRowKeys(rowKeys) {
-        emit('update:checked-row-keys', rowKeys)
-      }
+      // function updateCheckedRowKeys(rowKeys) {
+      //   emit('update:checked-row-keys', rowKeys)
+      // }
 
       //获取表格大小
       const getTableSize = computed(() => state.tableSize)
