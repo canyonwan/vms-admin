@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
   import { NDialogProvider, NNotificationProvider, NMessageProvider } from 'naive-ui'
 
   export default defineComponent({
